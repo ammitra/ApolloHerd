@@ -32,7 +32,9 @@ The main dependency is the HERD library, which in turn requires the following:
 yum install gcc-c++ make cmake3 boost-devel log4cplus-devel yaml-cpp-devel msgpack-devel cppzmq-devel
 ```
 
- 2. Build HERD library, then the plugin
+ 2. Build the [HERD library](https://github.com/ammitra/ApolloHerd/tree/master/herd-library).
+
+ 3. Build the ApolloSM_device plugin:
 ```
 mkdir build
 cd build
