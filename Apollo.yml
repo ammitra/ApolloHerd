@@ -1,0 +1,8 @@
+libraries:
+  - lib/libherd_dummy.so
+
+devices:
+  - id: ApolloSM_device
+    class: swatch::dummy::ApolloDevice
+    uri: blah:///dev/fileA
+    addressTable: /path/to/addressTableA.xml
