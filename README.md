@@ -3,11 +3,6 @@ Their work can be found [here](https://gitlab.cern.ch/cms-tracker-phase2-onlines
 
 # ApolloSM_device plugin for HERD library
 
-This repository contains a few classes that illustrate how to create a hardware-specific/application-specific plugin using the [HERD library](https://gitlab.cern.ch/cms-tracker-phase2-onlinesw/herd-library). Specifically, it contains an example device class, `DummyDevice`, that:
-
- * registers 5 commands, implemented by the `AlignLinks`, `ConfigureRxMGTs`, `ConfigureTxMGTs`, `Reboot` and `Reset` classes; and
- * registers an example Finite State Machine (FSM), whose transitions consist of one or more of the commands, run in sequence
-
 This repository contains an ApolloSM_device-specific plugin with an `ApolloDevice` class that utilizes the [EvaluateCommand](https://github.com/dgastler/BUTool/blob/0e436628f55c17be3e43840e9006f1e75b787413/include/BUTool/CommandList.hh#L63) functionality from [BUTool](https://github.com/dgastler/BUTool/tree/0e436628f55c17be3e43840e9006f1e75b787413) to wrap several ApolloSM_device commands, including: 
 
  * `cmpwrdown`, `cmpwrup`, `read`, `svfplayer` and
