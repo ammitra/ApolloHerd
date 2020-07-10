@@ -28,7 +28,7 @@ yum install gcc-c++ make cmake3 boost-devel log4cplus-devel yaml-cpp-devel msgpa
 ```
  2. Ensure that the `herd-library` submodule checked out. If not, `git submodule update --init`.
 
- 3. Build the [HERD library](https://github.com/ammitra/ApolloHerd/tree/master/herd-library).
+ 3. Build the [HERD library](https://gitlab.cern.ch/cms-tracker-phase2-onlinesw/herd-library).
 
  4. Build the ApolloSM_device plugin:
 ```
