@@ -20,7 +20,33 @@ The main dependency is the HERD library, which in turn requires the following:
  * [cppzmq](https://github.com/zeromq/cppzmq)
 
 
-## Build instructions
+## Building on an Apollo blade
+The following steps will build the ApolloHerd plugin and HERD instance on the blade:
+
+```
+ssh user@apolloXY
+git clone --recursive https://github.com/ammitra/ApolloHerd.git
+cd ApolloHerd/herd-library
+mkdir build && cd build
+cmake3 -DBUILD_SHARED_LIBS=ON ..
+make
+cd ../../
+mkdir build && cd build
+cmake3 -DBUILD_SHARED_LIBS=ON ../herd-library
+make 
+cd ..
+make
+```
+
+To start the server and allow for remote control: 
+
+```
+source env.sh
+./build/control-fsm-server Apollo.yml
+```
+
+
+## General build instructions
 
  1. Install the HERD library depdendencies listed above. For example, on CentOS7:
 ```
