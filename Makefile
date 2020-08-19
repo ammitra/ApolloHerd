@@ -8,7 +8,7 @@ APOLLO_PATH = /opt/BUTool
 CACTUS_ROOT = /opt/cactus
 
 BUILD_HOME = $(ROOT_DIR)
-include ${ROOT_DIR}/herd-library/deprecated/mfCommonDefs.mk
+#include ${ROOT_DIR}/herd-library/deprecated/mfCommonDefs.mk
 
 Project = swatch
 Package = dummy
@@ -57,5 +57,5 @@ ExecutableLibraries = \
 	herd \
 	dl
 
-include ${ROOT_DIR}/herd-library/deprecated/mfRules.mk
-include ${ROOT_DIR}/herd-library/deprecated/mfRPMRules.mk
+#include ${ROOT_DIR}/herd-library/deprecated/mfRules.mk
+#include ${ROOT_DIR}/herd-library/deprecated/mfRPMRules.mk
