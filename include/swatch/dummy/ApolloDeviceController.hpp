@@ -78,7 +78,7 @@ class ApolloDeviceController {
 
     private:
     BUTool::ApolloSMDevice *ptrSMDevice;
-    std::vector<std::string> arg {"/opt/address_tables/address_apollo.xml"};
+    std::vector<std::string> arg {"/opt/address_tables/address_apollo.xml"}; // image addr
 };
 
 }   // dummy
