@@ -1,33 +1,34 @@
-#include "swatch/dummy/ApolloDevice.hpp"
-#include "swatch/dummy/commands/ApolloAccess.hpp"
-#include "swatch/dummy/commands/Read.hpp"
-#include "swatch/dummy/commands/SVFPlayer.hpp"
-#include "swatch/dummy/commands/CMPwrUp.hpp"
-#include "swatch/dummy/commands/CMPwrDown.hpp"
+#include "swatch/apolloherd/ApolloDevice.hpp"
+#include "swatch/apolloherd/commands/ApolloAccess.hpp"
+#include "swatch/apolloherd/commands/Read.hpp"
+#include "swatch/apolloherd/commands/SVFPlayer.hpp"
+#include "swatch/apolloherd/commands/CMPwrUp.hpp"
+#include "swatch/apolloherd/commands/CMPwrDown.hpp"
 #include "swatch/core/Factory.hpp"
-#include "swatch/dummy/ApolloDeviceController.hpp"
+#include "swatch/apolloherd/ApolloDeviceController.hpp"
 
 // register device to factory
-SWATCH_REGISTER_CLASS(swatch::dummy::ApolloDevice)
+SWATCH_REGISTER_CLASS(swatch::apolloherd::ApolloDevice)
 
 namespace swatch {
-namespace dummy {
+namespace apolloherd {
 
 ApolloDevice::ApolloDevice(const core::AbstractStub& aStub) :
-    Device(aStub),
-    mController(getStub().uri, getStub().addressTable)
-    {
-        // register commands 
-        auto& dev_cmd = registerCommand<commands::ApolloAccess>("dev_cmd");
-        auto& read = registerCommand<commands::Read>("read");
-        auto& svfplayer = registerCommand<commands::SVFPlayer>("svfplayer");
-        auto& cmpwrup = registerCommand<commands::CMPwrUp>("cmpwrup");
-        auto& cmpwrdown = registerCommand<commands::CMPwrDown>("cmpwrdown");
-    }
+  Device(aStub),
+  mController(getStub().uri, getStub().addressTable)
+{
+  // register commands 
+  auto& dev_cmd = registerCommand<commands::ApolloAccess>("dev_cmd");
+  auto& read = registerCommand<commands::Read>("read");
+  auto& svfplayer = registerCommand<commands::SVFPlayer>("svfplayer");
+  auto& cmpwrup = registerCommand<commands::CMPwrUp>("cmpwrup");
+  auto& cmpwrdown = registerCommand<commands::CMPwrDown>("cmpwrdown");
+}
 
 ApolloDevice::~ApolloDevice()
 {
 }
 
-}       // dummy
-}       // swatch
+}   // apolloherd
+}   // swatch
+

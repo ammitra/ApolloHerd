@@ -29,4 +29,3 @@ pathadd LD_LIBRARY_PATH "/opt/BUTool/lib/"
 export LD_LIBRARY_PATH
 
 export SWATCH_LOG4CPLUS_CONFIG=${BASE_DIR}/herd-library/log4cplus.properties
-
