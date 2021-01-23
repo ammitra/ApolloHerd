@@ -6,7 +6,7 @@ Derived from the work of the CMS Phase-2 Tracker Online SW group, whose work can
 
 ## Overview
 
-This repository contains an ApolloSM_device-specific plugin with an `ApolloDevice` class that utilizes the [EvaluateCommand]() functionality from [BUTool]() to wrap several ApolloSM_device commands, including:
+This repository contains an ApolloSM_device-specific plugin with an `ApolloDevice` class that utilizes the [EvaluateCommand](https://github.com/BU-Tools/BUTool/blob/a1e09e6b002829820006bb8e749ccb9541450c17/include/BUTool/CommandList.hh#L172) functionality from [BUTool](https://github.com/BU-Tools/BUTool) to wrap several ApolloSM_device commands, including:
 
 * `cmpwrdown`, `cmpwrup`, `read`, `svfplayer` and 
 * `dev_cmd`, which allows for the execution of any ApolloSM_device command by passing the command string and the appropriate arguments.
@@ -16,8 +16,8 @@ This repository contains an ApolloSM_device-specific plugin with an `ApolloDevic
 The main dependency is the HERD library, which in turn requires:
 
 * Build utilities: make, CMake3
-* [boost]()
-* [log4cplus]()
+* [boost](https://boost.org/)
+* [log4cplus](https://github.com/log4cplus/log4cplus)
 
 ## Building on an Apollo
 
