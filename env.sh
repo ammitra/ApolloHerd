@@ -22,9 +22,13 @@ function pathadd() {
 
 BASE_DIR=$( readlink -f $(dirname $BASH_SOURCE)/ )
 
-pathadd LD_LIBRARY_PATH "${BASE_DIR}/build/herd-library"
+#pathadd LD_LIBRARY_PATH "${BASE_DIR}/build/herd-library"
+pathadd LD_LIBRARY_PATH "${BASE_DIR}/build"
 pathadd LD_LIBRARY_PATH "${BASE_DIR}/lib"
 pathadd LD_LIBRARY_PATH "/opt/BUTool/lib/"
+
+# adding libherd_app.so
+pathadd LD_LIBRARY_PATH "/usr/local/lib"
 
 export LD_LIBRARY_PATH
 
