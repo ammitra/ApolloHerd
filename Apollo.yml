@@ -1,3 +1,5 @@
+type: ApolloDevice
+
 libraries:
   - lib/libherd_dummy.so
 
