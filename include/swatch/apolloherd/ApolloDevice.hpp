@@ -5,7 +5,7 @@
 #include "swatch/apolloherd/ApolloDeviceController.hpp"
 
 namespace swatch {
-namespace ApolloHerd {
+namespace apolloherd {
 
 class ApolloDevice : public action::Device {
 public:
