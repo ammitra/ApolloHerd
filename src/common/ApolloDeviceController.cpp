@@ -60,7 +60,7 @@ int ApolloDeviceController::cmpwrup(std::string pwrup_args)
   return ptrSMDevice->EvaluateCommand(CMPWRUPArgs);    
 }
 
-int ApolloDeviceController::cmpwrdown(std::string cmpwrdown)
+int ApolloDeviceController::cmpwrdown(std::string pwrdown_args)
 {
   std::istringstream iss(pwrdown_args);
   std::vector<std::string> CMPWRDOWNArgs {"cmpwrdown"};
