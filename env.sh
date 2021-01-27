@@ -32,4 +32,5 @@ pathadd LD_LIBRARY_PATH "/usr/local/lib"
 
 export LD_LIBRARY_PATH
 
-export SWATCH_LOG4CPLUS_CONFIG=${BASE_DIR}/herd-library/log4cplus.properties
+#export SWATCH_LOG4CPLUS_CONFIG=${BASE_DIR}/herd-library/log4cplus.properties
+export SWATCH_LOG4CPLUS_CONFIG=/usr/local/etc/herd/log4cplus.properties
