@@ -37,11 +37,14 @@ for communication.
         cmake3 ..
         make
         ```
-    * Finally, if you want to install the HERD library and control application, run `sudo make install`
+    * Finally, if you want to install the HERD library and control application, run 
+    ```
+    sudo make install
+    ```
 
 
 
-3. Build the plugin:
+3. Checkout the ApolloHerd plugin and build by running:
 
 ```
 mkdir build && cd build
@@ -58,6 +61,13 @@ After installing the HERD control app (see above) and building ApolloHerd, run:
 ```
 source env.sh
 herd-control-app Apollo.yml
+```
+
+NOTE: if `ERROR: locale::facet::_S_create_c_locale name not valid` error, then prepend command with `LC_ALL=C` (until workaround found)
+
+```
+source env.sh
+LC_ALL=C herd-control-app Apollo.yml
 ```
 
 

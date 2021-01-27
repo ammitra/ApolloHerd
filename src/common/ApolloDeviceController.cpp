@@ -16,7 +16,8 @@ ApolloDeviceController::~ApolloDeviceController()
 }
 
 // I think for these, it would be better just to pass vector<string>, vector<uint64_t>
-// since that is what ApolloSMDevice takes, then let EvaluateCommand parse it. Would be much simpler
+// since that is what ApolloSMDevice takes, then pass directly to the appropriate command
+// seems simpler?
 
 int ApolloDeviceController::dev_cmd(std::string command_args)
 {
