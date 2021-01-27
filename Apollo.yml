@@ -1,10 +1,10 @@
 type: ApolloDevice
 
 libraries:
-  - lib/libherd_dummy.so
+  - libApolloHerd.so
 
 devices:
   - id: ApolloSM_device
-    class: swatch::dummy::ApolloDevice
+    class: swatch::apolloherd::ApolloDevice
     uri: blah:///dev/fileA
     addressTable: /path/to/addressTableA.xml
