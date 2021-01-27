@@ -30,7 +30,7 @@ public:
   int cmpwrdown(std::string pwrdown_args);
 
 private:
-  BUTool::ApolloSM_device *ptrSMDevice;
+  BUTool::ApolloSMDevice *ptrSMDevice;
   std::vector<std::string> arg {"/opt/address_tables/connections.xml"};
 };
 
