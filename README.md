@@ -27,7 +27,19 @@ for communication.
 
 1. ssh into the SoC
 
-2. Install the HERD control app and library, along with their dependencies, following the instructions in the [README](https://gitlab.cern.ch/cms-tracker-phase2-onlinesw/herd-control-app).
+2. Install the HERD control app and library, along with their dependencies, following the instructions in the [README](https://gitlab.cern.ch/cms-tracker-phase2-onlinesw/herd-control-app):
+
+    * Install the dependencies: `yum install gcc-c++ make cmake3 boost-devel log4cplus-devel yaml-cpp-devel jsoncpp-devel gtest-devel`
+    * Ensure `herd-library` checked out, or run `git submodule update --init`
+    * Build HERD library and control application with
+        ```
+        mkdir build && cd build
+        cmake3 ..
+        make
+        ```
+    * Finally, if you want to install the HERD library and control application, run `sudo make install`
+
+
 
 3. Build the plugin:
 
@@ -39,6 +51,13 @@ make
 
 ## Using this plugin with the control application
 
-todo
+*(Docker container instructions would go here)*
+
+After installing the HERD control app (see above) and building ApolloHerd, run:
+
+```
+source env.sh
+herd-control-app Apollo.yml
+```
 
 
