@@ -19,11 +19,15 @@ The main dependency is the HERD library, which in turn requires:
 * [boost](https://boost.org/)
 * [log4cplus](https://github.com/log4cplus/log4cplus)
 
+And, in the switch from ZMQ & msgpack to HTTP & JSON, the HERD control app now requires
+* [jsoncpp-devel](https://github.com/open-source-parsers/jsoncpp)
+for communication.
+
 ## Building on an Apollo
 
 1. ssh into the SoC
 
-2. Install the HERD control app and library, along with their dependencies, following the instructions in the [README]().
+2. Install the HERD control app and library, along with their dependencies, following the instructions in the [README](https://gitlab.cern.ch/cms-tracker-phase2-onlinesw/herd-control-app).
 
 3. Build the plugin:
 

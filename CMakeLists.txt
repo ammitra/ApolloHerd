@@ -7,7 +7,7 @@ project(ApolloHerd VERSION 0.0.1
                    LANGUAGES CXX)
 
 # herd library
-find_package(herd 0.01 REQUIRED)
+find_package(herd 0.0.1 REQUIRED)
 
 # paths to Apollo and Cactus
 SET(APOLLO_PATH "/opt/BUTool")
@@ -22,13 +22,13 @@ add_library(ApolloHerd SHARED)
 
 # specifies sources to use when building ApolloHerd
 target_sources(ApolloHerd PRIVATE
+    src/common/ApolloDeviceController.cpp
+    src/common/ApolloDevice.cpp
     src/common/commands/ApolloAccess.cpp
     src/common/commands/CMPwrDown.cpp
     src/common/commands/CMPwrUp.cpp
     src/common/commands/Read.cpp
     src/common/commands/SVFPlayer.cpp
-    src/common/ApolloDevice.cpp
-    src/common/ApolloDeviceController.cpp
     )
 
 target_include_directories(ApolloHerd
@@ -43,7 +43,9 @@ target_link_libraries(ApolloHerd HERD::herd)
 
 target_link_directories(ApolloHerd PUBLIC
     ${APOLLO_PATH}/lib
+    ${CACTUS_PATH}/lib
     )
+
 target_link_libraries(ApolloHerd
         BUTool_ApolloSM
         BUTool_ApolloSMDevice
@@ -60,8 +62,8 @@ target_link_libraries(ApolloHerd
 # Main target: Build options
 #######################################################
 
-target_compile_features(herd_dummy PUBLIC cxx_std_11)
-target_compile_options(herd_dummy PRIVATE -g -fPIC -O3 -Werror=return-type -Wall)
+target_compile_features(ApolloHerd PUBLIC cxx_std_11)
+target_compile_options(ApolloHerd PRIVATE -g -fPIC -O3 -Werror=return-type -Wall)
 
 # Use pre-CXX11 ABI to resolve linker errors with gcc 8.3.0 on arm/v7
 # See https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dual_abi.html
