@@ -38,24 +38,22 @@ target_include_directories(ApolloHerd
         ${CACTUS_PATH}/include
     )
 
-# link to the necessary BUTool x cactus libs
-target_link_libraries(ApolloHerd HERD::herd)
-
 target_link_directories(ApolloHerd PUBLIC
     ${APOLLO_PATH}/lib
     ${CACTUS_PATH}/lib
     )
 
 target_link_libraries(ApolloHerd
-        BUTool_ApolloSM
-        BUTool_ApolloSMDevice
-        BUTool_GenericIPBus
-        BUTool_GenericIPBusDevice
-        BUTool_Helpers
-        BUTool_IPBusIO
-        BUTool_IPBusStatus
-        BUTool
-        ToolException
+    HERD::herd
+    BUTool_ApolloSM
+    BUTool_ApolloSMDevice
+    BUTool_GenericIPBus
+    BUTool_GenericIPBusDevice
+    BUTool_Helpers
+    BUTool_IPBusIO
+    BUTool_IPBusStatus
+    BUTool
+    ToolException
     )
 
 #######################################################
