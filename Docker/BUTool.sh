@@ -45,15 +45,23 @@ cd BUTool/plugins/
 git clone https://github.com/apollo-lhc/ApolloSM_plugin.git
 git clone https://github.com/BU-Tools/BUTool-IPBUS-Helpers.git
 git clone https://github.com/BU-Tools/GenericIPBus_plugin.git
-cd ../
-cat > plugins/Makefile.plugins << EOF
+# create Makefile.plugins file to ensure plugin dependencies are satisfied
+cat > Makefile.plugins << EOF
 ApolloSM_plugin: BUTool-IPBUS-Helpers
-         ${MAKE} ${FLAGS} -C $@
+		\${MAKE} \${FLAGS} -C $@
 GenericIPBus_plugin: BUTool-IPBUS-Helpers
-         ${MAKE} ${FLAGS} -C $@
+		\${MAKE} \${FLAGS} -C $@
 EOF
+
+# make BUTool and plugins
+cd ../
 cp make/Makefile.x86 ./Makefile
+
 # -k flag to ignore ApolloSM_device peek/pokeUIO.cxx from format error on build
 # this is not good - find a way to add the compiler flag `-Wno-format-truncation` when building ApolloSM_device plugin
-make -k 
+#make -k 
+
+# instead, export the env var first
+export CXX_FLAGS="-Wno-format-truncation"
+make
 
