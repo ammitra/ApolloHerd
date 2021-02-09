@@ -70,4 +70,10 @@ source env.sh
 LC_ALL=C herd-control-app Apollo.yml
 ```
 
+## WIP - Running in a container
 
+Eventually, the goal is to run this software in a container on the Apollo. In the `Docker/` directory there are several scripts designed to be run inside of a container. The main script (almost working) is `build.sh` and installs all of the software necessary to run the HERD control app and the Apollo plugin for HERD. The code is all compiled inside of the container:
+
+```
+gitlab-registry.cern.ch/cms-tracker-phase2-onlinesw/herd-docker/herd-base-dev:master-8cd483a1
+```
