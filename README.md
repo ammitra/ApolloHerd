@@ -53,14 +53,6 @@ make
 ```
 
 ## Using this plugin with the control application
-**If building in a container: (WIP)**
-To build the image targeting armv7 on x86 architecture:
-1. Navigate to directory containing Dockerfile
-2. Run `docker buildx build --platform linux/arm -t ammitra/apolloherd . --push`
-	* login to the docker hub and substitute your own username as necessary
-This should build and push the armv7 image to the desired registry. 
- 
-
 **If built directly on SoC:**
 After installing the HERD control app (see above) and building ApolloHerd, run:
 
@@ -83,3 +75,15 @@ Eventually, the goal is to run this software in a container on the Apollo. In th
 ```
 gitlab-registry.cern.ch/cms-tracker-phase2-onlinesw/herd-docker/herd-base-dev:master-8cd483a1
 ```
+
+**If building in a container: (WIP)**
+To build the image targeting armv7 on x86 architecture:
+1. Navigate to directory containing Dockerfile
+2. Run `docker buildx build --platform linux/arm -t ammitra/apolloherd . --push`
+	* login to the docker hub and substitute your own username as necessary
+This should build and push the armv7 image to the desired registry. 
+
+Useful links regarding `buildx`:
+    * https://frightanic.com/computers/docker-buildx-the-best-thing-since-sliced-bread/
+    * https://medium.com/@artur.klauser/building-multi-architecture-docker-images-with-buildx-27d80f7e2408
+    * 
