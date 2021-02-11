@@ -53,9 +53,15 @@ make
 ```
 
 ## Using this plugin with the control application
+**If building in a container: (WIP)**
+To build the image targeting armv7 on x86 architecture:
+1. Navigate to directory containing Dockerfile
+2. Run `docker buildx build --platform linux/arm -t ammitra/apolloherd . --push`
+	* login to the docker hub and substitute your own username as necessary
+This should build and push the armv7 image to the desired registry. 
+ 
 
-*(Docker container instructions would go here)*
-
+**If built directly on SoC:**
 After installing the HERD control app (see above) and building ApolloHerd, run:
 
 ```
