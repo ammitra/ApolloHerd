@@ -84,6 +84,5 @@ To build the image targeting armv7 on x86 architecture:
 This should build and push the armv7 image to the desired registry. 
 
 Useful links regarding `buildx`:
-    * https://frightanic.com/computers/docker-buildx-the-best-thing-since-sliced-bread/
-    * https://medium.com/@artur.klauser/building-multi-architecture-docker-images-with-buildx-27d80f7e2408
-    * 
+* https://frightanic.com/computers/docker-buildx-the-best-thing-since-sliced-bread/
+* https://medium.com/@artur.klauser/building-multi-architecture-docker-images-with-buildx-27d80f7e2408
