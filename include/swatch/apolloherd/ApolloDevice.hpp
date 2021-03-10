@@ -17,6 +17,12 @@ public:
     return mController;
   }
 
+  // need to implement this member to un-abstract it, allowing for instantiation of ApolloDevice
+  void retrieveMetricValues()
+  {
+
+  }
+
 private:
   ApolloDeviceController mController;
 };
