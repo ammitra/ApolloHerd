@@ -7,7 +7,7 @@ project(ApolloHerd VERSION 0.0.1
                    LANGUAGES CXX)
 
 # herd library
-find_package(herd 0.0.1 REQUIRED)
+find_package(swatch 0.3.0 REQUIRED)
 
 # paths to Apollo and Cactus
 SET(APOLLO_PATH "/opt/BUTool")
@@ -44,7 +44,7 @@ target_link_directories(ApolloHerd PUBLIC
     )
 
 target_link_libraries(ApolloHerd
-    HERD::herd
+    SWATCH::swatch_action
     BUTool_ApolloSM
     BUTool_ApolloSMDevice
     BUTool_GenericIPBus
