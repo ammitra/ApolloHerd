@@ -1,0 +1,9 @@
+variables:
+  BUILD_PLATFORMS: linux/arm/v7
+  HERD_IMAGE_TAG: v0.1.0
+  HERD_DEFAULT_CONFIG: Apollo.yml
+
+include:
+  - project: 'cms-tracker-phase2-onlinesw/herd-control-app'
+    ref: v0.1.0
+    file: '/ci/plugin-template/gitlab-ci.yml'
