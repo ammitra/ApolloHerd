@@ -25,13 +25,13 @@ if [ "$1" != "app" ]; then
     # 2) build uHAL
     cd /tmp/
     git clone --branch ${UHAL_VERSION} https://github.com/ipbus/ipbus-software.git
-    cd ipbus-software/
     # patch uHAL libs to use _GLIBCXX_USE_CXX11_ABI macro
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.hpp') && \
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.hxx') && \
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.cpp') && \
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.cxx') && \
     # changed BUILD_UHAL_TESTS: 1 -> 0 BUILD_UHAL_PYCOHAL: 1 -> 0
+    cd ipbus-software/
     make -j$(nproc) Set=uhal BUILD_PUGIXML=0 BUILD_UHAL_TESTS=0 BUILD_UHAL_PYCOHAL=0
     make Set=uhal BUILD_PUGIXML=0 BUILD_UHAL_TESTS=0 BUILD_UHAL_PYCOHAL=0 install
     cd ..
@@ -40,11 +40,11 @@ if [ "$1" != "app" ]; then
 
     # 3) building UIOuHAL
     git clone --branch ${UIOUHAL_VERSION} https://github.com/dgastler/UIOuHAL.git
-    cd UIOuHAL/
     # 3b) patch UIOuHAL to use _GLIBCXX_USE_CXX11_ABI macro
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./UIOuHAL -name '*.hpp') && \
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./UIOuHAL -name '*.cpp') && \
     # build
+    cd UIOuHAL/
     make
     mkdir -p /opt/UIOuHAL
     cp -r lib /opt/UIOuHAL
