@@ -28,7 +28,7 @@ pathadd LD_LIBRARY_PATH "${BASE_DIR}/lib"
 pathadd LD_LIBRARY_PATH "/opt/BUTool/lib/"
 
 # adding libherd_app.so
-pathadd LD_LIBRARY_PATH "/usr/local/lib64"
+pathadd LD_LIBRARY_PATH "/usr/local/lib"
 
 export LD_LIBRARY_PATH
 

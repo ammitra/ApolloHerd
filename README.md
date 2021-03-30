@@ -13,7 +13,7 @@ This repository contains an ApolloSM_device-specific plugin with an `ApolloDevic
 
 ## Dependencies
 
-The main dependency is the HERD library, which in turn requires:
+The main dependency is `swatch`, which in turn requires:
 
 * Build utilities: make, CMake3
 * [boost](https://boost.org/)
@@ -30,7 +30,10 @@ for communication.
 2. Install the HERD control app and library, along with their dependencies, following the instructions in the [README](https://gitlab.cern.ch/cms-tracker-phase2-onlinesw/herd-control-app):
 
     * Install the dependencies: `yum install gcc-c++ make cmake3 boost-devel log4cplus-devel yaml-cpp-devel jsoncpp-devel gtest-devel`
-    * Ensure `herd-library` checked out, or run `git submodule update --init`
+    * Ensure `swatch` checked out, or run `git submodule update --init`
+    * **NOTE:** due to the old compiler on the Apollo failing with certain aspects of the build (namely the test suite, which is not necessary for this), certain aspects of the build process for `swatch` and the control app must be changed:
+        * Comment out [Line 92](https://gitlab.cern.ch/cms-tracker-phase2-onlinesw/herd-control-app/-/blob/master/CMakeLists.txt#L92) of the control app CMakeLists.txt file
+        * Comment out [Line 44](https://gitlab.cern.ch/cms-cactus/core/swatch/-/blob/master/swatch/CMakeLists.txt#L44), [Line 53](https://gitlab.cern.ch/cms-cactus/core/swatch/-/blob/master/swatch/CMakeLists.txt#L53), and [Line 63](https://gitlab.cern.ch/cms-cactus/core/swatch/-/blob/master/swatch/CMakeLists.txt#L53) of the `swatch` CMakeLists.txt file
     * Build HERD library and control application with
         ```
         mkdir build && cd build
@@ -54,7 +57,7 @@ make
 
 ## Using this plugin with the control application
 **If built directly on SoC:**
-After installing the HERD control app (see above) and building ApolloHerd, run:
+After installing the HERD control app and `swatch` (see above) and building ApolloHerd, run:
 
 ```
 source env.sh
