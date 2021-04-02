@@ -1,3 +1,8 @@
+/* 
+  ApolloSMDevice::svfplayer calls ApolloSM::svfplayer
+  https://github.com/apollo-lhc/ApolloSM_plugin/blob/develop/src/ApolloSM/ApolloSM_svf.cc#L4
+*/
+
 #include "swatch/apolloherd/commands/SVFPlayer.hpp"
 #include "swatch/apolloherd/ApolloDevice.hpp"
 #include <BUTool/CommandReturn.hh>
@@ -21,19 +26,30 @@ action::Command::State SVFPlayer::code(const core::ParameterSet& aParams)
 {
   ApolloDeviceController& lController = getActionable<ApolloDevice>().getController();
 
-  std::string SVF = aParams.get<std::string>("SVF file  ");
-  std::string XVC = aParams.get<std::string>("XVC device");
+  std::vector<std::string> svfplayer_args {"svfplayer"};
+  svfplayer_args.push_back(aParams.get<std::string>("SVF file  "));
+  svfplayer_args.push_back(aParams.get<std::string>("XVC device"));
 
-  // concatenating the two parameters into space-separated string
-  std::string SVF_XVC;
-  SVF_XVC = SVF + ' ' + XVC;
+  State lState;
 
-  State lState = kDone;
+  // perform command
+  CommandReturn::status result = lController.EvaluateCommand(svfplayer_args);
 
-  if (lController.svfplayer(SVF_XVC) == CommandReturn::status::BAD_ARGS)
-    throw core::RuntimeError("bad arguments");
-  else
-    lState = kDone;
+  // check the command result, send to HERD control console (BUTextIO functionality)
+  switch (result) {
+    case 0:
+      lState = kError;
+      setStatusMsg("Command not found");
+      break;
+    case 2:
+      lState = kError;
+      setStatusMsg("Bad arguments");
+      break;
+    case 1:
+      lState = kDone;
+      //setResult( result from BUTextIO stringstream )
+      break;
+  }
 
   return lState;
 }
