@@ -16,7 +16,7 @@ namespace swatch {
 namespace apolloherd {
 namespace commands {
 
-Read::Read(const::std::string& aId, action::ActionableObject& aActionable)
+Read::Read(const std::string& aId, action::ActionableObject& aActionable)
   : Command(aId, aActionable, std::string("read"))
   {
     registerParameter<std::string>("address", " ");
