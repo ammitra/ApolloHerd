@@ -1,5 +1,10 @@
 #include "swatch/apolloherd/ApolloDeviceController.hpp"
 
+/*
+  wraps BUTool and ApolloSMDevice commands through direct calls to EvaluateCommand
+  https://github.com/BU-Tools/BUTool/blob/3716389c20e8e8708c02eccf47d74222bf290cf8/include/BUTool/CommandList.hh#L171
+*/
+
 namespace swatch {
 namespace apolloherd {
 
@@ -15,14 +20,11 @@ ApolloDeviceController::~ApolloDeviceController()
   }
 }
 
-// I think for these, it would be better just to pass vector<string>, vector<uint64_t>
-// since that is what ApolloSMDevice takes, then pass directly to the appropriate command
-// seems simpler?
-
-int ApolloDeviceController::dev_cmd(std::string command_args)
+CommandReturn::status ApolloDeviceController::dev_cmd(std::string command_args)
 {
   // split command_args into constituent parts
   // https://stackoverflow.com/a/20114104
+  // "read SM_INFO.GIT_HASH*" -> "read","SM_INFO.GIT_HASH*"
   std::istringstream iss(command_args);
   std::vector<std::string> CommandArgs;
   std::copy(std::istream_iterator<std::string>(iss),
@@ -31,17 +33,21 @@ int ApolloDeviceController::dev_cmd(std::string command_args)
   return ptrSMDevice->EvaluateCommand(CommandArgs);
 }
 
-int ApolloDeviceController::read(std::string args)
+CommandReturn::status ApolloDeviceController::EvaluateCommand(std::vector<std::string> args)
 {
-  std::istringstream iss(args);
-  std::vector<std::string> ReadArgs {"read"};
-  std::copy(std::istream_iterator<std::string>(iss),
-            std::istream_iterator<std::string>(),
-            std::back_inserter(ReadArgs));
-  return ptrSMDevice->EvaluateCommand(ReadArgs);
+  // command and arguments sent to BUTool EvaluateCommand function and parsed there
+  return ptrSMDevice->EvaluateCommand(args);
 }
 
-int ApolloDeviceController::svfplayer(std::string SVF_XVC)
+// if we are just using EvaluateCommand, these specific commands are not necessary
+// instead, just use the ApolloDeviceController::EvaluateCommand function to access the BUTool functionality directly
+/*
+CommandReturn::status ApolloDeviceController::read(std::vector<std::string> read_args)
+{
+  return ptrSMDevice->EvaluateCommand(read_args);
+}
+
+CommandReturn::status ApolloDeviceController::svfplayer(std::string SVF_XVC)
 {
   std::istringstream iss(SVF_XVC);
   std::vector<std::string> SVFPlayerArgs {"svfplayer"};
@@ -51,7 +57,7 @@ int ApolloDeviceController::svfplayer(std::string SVF_XVC)
   return ptrSMDevice->EvaluateCommand(SVFPlayerArgs);    
 }
 
-int ApolloDeviceController::cmpwrup(std::string pwrup_args)
+CommandReturn::status ApolloDeviceController::cmpwrup(std::string pwrup_args)
 {
   std::istringstream iss(pwrup_args);
   std::vector<std::string> CMPWRUPArgs {"cmpwrup"};
@@ -61,7 +67,7 @@ int ApolloDeviceController::cmpwrup(std::string pwrup_args)
   return ptrSMDevice->EvaluateCommand(CMPWRUPArgs);    
 }
 
-int ApolloDeviceController::cmpwrdown(std::string pwrdown_args)
+CommandReturn::status ApolloDeviceController::cmpwrdown(std::string pwrdown_args)
 {
   std::istringstream iss(pwrdown_args);
   std::vector<std::string> CMPWRDOWNArgs {"cmpwrdown"};
@@ -70,6 +76,7 @@ int ApolloDeviceController::cmpwrdown(std::string pwrdown_args)
             std::back_inserter(CMPWRDOWNArgs));
   return ptrSMDevice->EvaluateCommand(CMPWRDOWNArgs);
 }
+*/
 
 }   // apolloherd
 }   // swatch
