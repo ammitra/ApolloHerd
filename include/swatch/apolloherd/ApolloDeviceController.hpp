@@ -19,15 +19,21 @@ public:
 
   ~ApolloDeviceController();
 
-  int dev_cmd(std::string command_args);
+  // access any command by passing the command and arguments in one string
+  CommandReturn::status dev_cmd(std::vector<std::string>);
 
-  int read(std::string args);
+  // pass a vector of strings directly to EvaluateCommand (similar to above)
+  CommandReturn::status EvaluateCommand(std::vector<std::string>);
 
-  int svfplayer(std::string SVF_XVC);
+  /*
+  CommandReturn::status read(std::vector<std::string>);
 
-  int cmpwrup(std::string pwrup_args);
+  CommandReturn::status svfplayer(std::vector<std::string>);
 
-  int cmpwrdown(std::string pwrdown_args);
+  CommandReturn::status cmpwrup(std::vector<std::string>);
+
+  CommandReturn::status cmpwrdown(std::vector<std::string>);
+  */
 
 private:
   BUTool::ApolloSMDevice *ptrSMDevice;
