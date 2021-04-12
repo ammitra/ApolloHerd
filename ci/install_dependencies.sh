@@ -82,15 +82,4 @@ if [ "$1" != "app" ]; then
     cd ..
     rm -rf ApolloTool
 
-    # 5) remove compiler & unecessary libs - reduce image size
-    rm -rf /usr/local/libexec
-    rm -rf /usr/libexec/gcc
-    rm -rf /usr/lib/python3.6
-    rm -rf /usr/lib/python2.7
-    rm -rf /usr/local/lib/gcc
-    rm -rf /usr/local/lib/cmake
-    rm -rf /lib/gcc
-    #rm -rf /lib/perl5
-    #rm -rf /lib/rpm
-
 fi
