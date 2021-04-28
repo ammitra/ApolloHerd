@@ -76,6 +76,8 @@ if [ "$1" != "app" ]; then
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ -name '*.cc') && \
     # 5c) patch ApolloSM_plugin Makefile to deal with strange format-truncation error (append -Wno-format-trunctation to CXX_FLAGS variable)
     sed -i "s|-Wno-ignored-qualifiers|-Wno-ignored-qualifiers -Wno-format-truncation|g" plugins/ApolloSM_plugin/Makefile
+    # 5d) print out the first argument to uhal::ConnectionManager constructor in case this is the segfault
+    sed -i '/uhal::ConnectionManager manager(/i printf("first argument to uhal::ConnectionManager constructor : %s", prefix_connectionFile.c_str());' plugins/BUTool-IPBUS-Helpers/src/IPBusIO/IPBusConnection.cpp
     # time to build
     make local -j$(nproc) RUNTIME_LDPATH=/opt/BUTool COMPILETIME_ROOT=--sysroot=/
     make install RUNTIME_LDPATH=/opt/BUTool COMPILETIME_ROOT=--sysroot=/ INSTALL_PATH=/opt/BUTool
