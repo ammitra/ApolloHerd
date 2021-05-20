@@ -33,8 +33,8 @@ if [ "$1" != "app" ]; then
     # changed BUILD_UHAL_TESTS: 1 -> 0 BUILD_UHAL_PYCOHAL: 1 -> 0
     cd ipbus-software/
     git submodule update --init
-    make -j$(nproc) Set=uhal BUILD_PUGIXML=0 BUILD_UHAL_TESTS=0 BUILD_UHAL_PYCOHAL=0
-    make Set=uhal BUILD_PUGIXML=0 BUILD_UHAL_TESTS=0 BUILD_UHAL_PYCOHAL=0 install
+    make -j$(nproc) Set=uhal BUILD_PUGIXML=0 BUILD_UHAL_TESTS=1 BUILD_UHAL_PYCOHAL=1
+    make Set=uhal BUILD_PUGIXML=0 BUILD_UHAL_TESTS=1 BUILD_UHAL_PYCOHAL=1 install
     cd ..
     rm -rf ipbus-software/
     export CACTUS_ROOT=/opt/cactus
