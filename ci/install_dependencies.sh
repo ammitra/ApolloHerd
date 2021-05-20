@@ -3,9 +3,9 @@
 set -e
 set -x 
 
-UHAL_VERSION="v2.7.4"
-UIOUHAL_VERSION="feature-zynqmp_issues"
-APOLLOTOOL_VERSION="feature-USP_addrs"
+UHAL_VERSION="v2.8.0"
+UIOUHAL_VERSION="feature-uhal_280"
+APOLLOTOOL_VERSION="feature-uhal_280"
 
 if [ "$1" != "app" ]; then
 
@@ -32,6 +32,7 @@ if [ "$1" != "app" ]; then
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.cxx') && \
     # changed BUILD_UHAL_TESTS: 1 -> 0 BUILD_UHAL_PYCOHAL: 1 -> 0
     cd ipbus-software/
+    git submodule update --init
     make -j$(nproc) Set=uhal BUILD_PUGIXML=0 BUILD_UHAL_TESTS=0 BUILD_UHAL_PYCOHAL=0
     make Set=uhal BUILD_PUGIXML=0 BUILD_UHAL_TESTS=0 BUILD_UHAL_PYCOHAL=0 install
     cd ..
@@ -39,7 +40,7 @@ if [ "$1" != "app" ]; then
     export CACTUS_ROOT=/opt/cactus
 
     # 3) building UIOuHAL
-    git clone --branch ${UIOUHAL_VERSION} https://github.com/dgastler/UIOuHAL.git
+    git clone --branch ${UIOUHAL_VERSION} https://github.com/ammitra/UIOuHAL.git
     # 3b) patch UIOuHAL to use _GLIBCXX_USE_CXX11_ABI macro
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./UIOuHAL -name '*.hpp') && \
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./UIOuHAL -name '*.cpp') && \
@@ -65,10 +66,9 @@ if [ "$1" != "app" ]; then
     yum clean all
 
     # 5) build BUTool from ApolloTool meta repository
-    git clone --branch ${APOLLOTOOL_VERSION} https://github.com/apollo-lhc/ApolloTool.git
+    git clone --branch ${APOLLOTOOL_VERSION} https://github.com/ammitra/ApolloTool.git
     cd ApolloTool
     make init
-    rm -rf plugins/IPMC_plugin
     # 5b) patch BUTool and plugins to use _GLIBCXX_USECXX11_ABI macro
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ -name '*.hh') && \
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ -name '*.h') && \
@@ -79,7 +79,7 @@ if [ "$1" != "app" ]; then
     # 5d) print out the first argument to uhal::ConnectionManager constructor in case this is the segfault
     sed -i '/uhal::ConnectionManager manager(/i printf("first argument to uhal::ConnectionManager constructor : %s", prefix_connectionFile.c_str());' plugins/BUTool-IPBUS-Helpers/src/IPBusIO/IPBusConnection.cpp
     # time to build
-    make local -j$(nproc) RUNTIME_LDPATH=/opt/BUTool COMPILETIME_ROOT=--sysroot=/
+    make local -j$(nproc) RUNTIME_LDPATH=/opt/BUTool COMPILETIME_ROOT=--sysroot=/ MAP_TYPE=-DSTD_UNORDERED_MAP
     make install RUNTIME_LDPATH=/opt/BUTool COMPILETIME_ROOT=--sysroot=/ INSTALL_PATH=/opt/BUTool
     cd ..
     rm -rf ApolloTool
