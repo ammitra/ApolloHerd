@@ -1,6 +1,6 @@
 variables:
   BUILD_PLATFORMS: linux/arm/v7,linux/arm64,linux/amd64
-  COPY_INSTALL_PATHS: "/opt/BUTool /opt/cactus /opt/UIOuHAL /lib"
+  COPY_INSTALL_PATHS: "/opt/BUTool /opt/cactus /opt/UIOuHAL /lib /lib64"
   HERD_IMAGE_TAG: bug-reduce-size-armv7-app-image-ea7a1489
   HERD_DEFAULT_CONFIG: Apollo.yml
 
