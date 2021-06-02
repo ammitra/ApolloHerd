@@ -1,6 +1,6 @@
 variables:
   BUILD_PLATFORMS: linux/arm/v7,linux/arm64,linux/amd64
-  COPY_INSTALL_PATHS: "/opt/BUTool /opt/cactus /opt/UIOuHAL /lib /lib64"
+  COPY_INSTALL_PATHS: "/opt/BUTool /opt/cactus /opt/UIOuHAL /lib"
   HERD_IMAGE_TAG: v0.1.2
   HERD_DEFAULT_CONFIG: Apollo.yml
 
