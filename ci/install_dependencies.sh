@@ -5,7 +5,7 @@ set -x
 
 UHAL_VERSION="v2.7.4"
 UIOUHAL_VERSION="feature-zynqmp_issues"
-APOLLOTOOL_VERSION="feature-USP_addrs"
+APOLLOTOOL_VERSION="master"
 
 if [ "$1" != "app" ]; then
 
