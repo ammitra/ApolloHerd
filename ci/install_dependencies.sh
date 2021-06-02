@@ -3,7 +3,7 @@
 set -e
 set -x 
 
-UHAL_VERSION="v2.7.4"
+UHAL_VERSION=2.7.7
 UIOUHAL_VERSION="feature-zynqmp_issues"
 APOLLOTOOL_VERSION="master"
 
@@ -23,19 +23,24 @@ if [ "$1" != "app" ]; then
     yum clean all
 
     # 2) build uHAL
-    cd /tmp/
-    git clone --branch ${UHAL_VERSION} https://github.com/ipbus/ipbus-software.git
-    # patch uHAL libs to use _GLIBCXX_USE_CXX11_ABI macro
-    sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.hpp') && \
-    sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.hxx') && \
-    sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.cpp') && \
-    sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.cxx') && \
-    # changed BUILD_UHAL_TESTS: 1 -> 0 BUILD_UHAL_PYCOHAL: 1 -> 0
-    cd ipbus-software/
-    make -j$(nproc) Set=uhal BUILD_PUGIXML=0 BUILD_UHAL_TESTS=0 BUILD_UHAL_PYCOHAL=0
-    make Set=uhal BUILD_PUGIXML=0 BUILD_UHAL_TESTS=0 BUILD_UHAL_PYCOHAL=0 install
-    cd ..
-    rm -rf ipbus-software/
+    cp ci/*.repo /etc/yum.repos.d/
+    yum -y install --exclude *debuginfo \
+      cactuscore-uhal-*-${UHAL_VERSION}
+    yum clean all
+
+    # cd /tmp/
+    # git clone --branch ${UHAL_VERSION} https://github.com/ipbus/ipbus-software.git
+    # # patch uHAL libs to use _GLIBCXX_USE_CXX11_ABI macro
+    # sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.hpp') && \
+    # sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.hxx') && \
+    # sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.cpp') && \
+    # sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.cxx') && \
+    # # changed BUILD_UHAL_TESTS: 1 -> 0 BUILD_UHAL_PYCOHAL: 1 -> 0
+    # cd ipbus-software/
+    # make -j$(nproc) Set=uhal BUILD_PUGIXML=0 BUILD_UHAL_TESTS=0 BUILD_UHAL_PYCOHAL=0
+    # make Set=uhal BUILD_PUGIXML=0 BUILD_UHAL_TESTS=0 BUILD_UHAL_PYCOHAL=0 install
+    # cd ..
+    # rm -rf ipbus-software/
     export CACTUS_ROOT=/opt/cactus
 
     # 3) building UIOuHAL

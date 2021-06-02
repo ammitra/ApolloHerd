@@ -1,0 +1,5 @@
+[ipbus-sw-multiarch-test]
+name=IPbus software repository (multiarch test)
+baseurl=http://www.cern.ch/tsw/ipbus/multiarch-repo-test/v2.7.7/20200823/centos7/$basearch
+enabled=1
+gpgcheck=0
