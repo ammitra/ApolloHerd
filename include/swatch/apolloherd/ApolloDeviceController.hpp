@@ -9,10 +9,12 @@
 #include <iterator>     // std::istream_iterator, std::back_inserter
 #include <sstream>      // std::istringstream
 
+#include "emp/swatch/EMPDevice.hpp"
+
 namespace swatch {
 namespace apolloherd {
 
-class ApolloDeviceController {
+class ApolloDeviceController : public emp::swatch::EMPDevice {
 public:
 
   ApolloDeviceController(const std::string& aURI, const std::string& aAddrTable);

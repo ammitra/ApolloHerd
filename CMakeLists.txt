@@ -14,6 +14,12 @@ SET(APOLLO_PATH "/opt/BUTool")
 SET(CACTUS_PATH "/opt/cactus")
 
 #######################################################
+# Add subdirectories for dependencies
+#######################################################
+add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
+add_subdirectory(emp-herd)
+
+#######################################################
 # Main target: Declare - source files & dependencies
 #######################################################
 
@@ -44,6 +50,7 @@ target_link_directories(ApolloHerd PUBLIC
     )
 
 target_link_libraries(ApolloHerd
+    emp_swatch
     SWATCH::swatch_action
     BUTool_ApolloSM
     BUTool_ApolloSMDevice
