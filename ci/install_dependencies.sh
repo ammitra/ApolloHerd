@@ -27,20 +27,6 @@ if [ "$1" != "app" ]; then
     yum -y install --exclude *debuginfo \
       cactuscore-uhal-*-${UHAL_VERSION}
     yum clean all
-
-    # cd /tmp/
-    # git clone --branch ${UHAL_VERSION} https://github.com/ipbus/ipbus-software.git
-    # # patch uHAL libs to use _GLIBCXX_USE_CXX11_ABI macro
-    # sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.hpp') && \
-    # sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.hxx') && \
-    # sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.cpp') && \
-    # sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ipbus-software -name '*.cxx') && \
-    # # changed BUILD_UHAL_TESTS: 1 -> 0 BUILD_UHAL_PYCOHAL: 1 -> 0
-    # cd ipbus-software/
-    # make -j$(nproc) Set=uhal BUILD_PUGIXML=0 BUILD_UHAL_TESTS=0 BUILD_UHAL_PYCOHAL=0
-    # make Set=uhal BUILD_PUGIXML=0 BUILD_UHAL_TESTS=0 BUILD_UHAL_PYCOHAL=0 install
-    # cd ..
-    # rm -rf ipbus-software/
     export CACTUS_ROOT=/opt/cactus
 
     # 3) building UIOuHAL
@@ -81,8 +67,6 @@ if [ "$1" != "app" ]; then
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ -name '*.cc') && \
     # 5c) patch ApolloSM_plugin Makefile to deal with strange format-truncation error (append -Wno-format-trunctation to CXX_FLAGS variable)
     sed -i "s|-Wno-ignored-qualifiers|-Wno-ignored-qualifiers -Wno-format-truncation|g" plugins/ApolloSM_plugin/Makefile
-    # 5d) print out the first argument to uhal::ConnectionManager constructor in case this is the segfault
-    sed -i '/uhal::ConnectionManager manager(/i printf("first argument to uhal::ConnectionManager constructor : %s", prefix_connectionFile.c_str());' plugins/BUTool-IPBUS-Helpers/src/IPBusIO/IPBusConnection.cpp
     # time to build
     make local -j$(nproc) RUNTIME_LDPATH=/opt/BUTool COMPILETIME_ROOT=--sysroot=/
     make install RUNTIME_LDPATH=/opt/BUTool COMPILETIME_ROOT=--sysroot=/ INSTALL_PATH=/opt/BUTool
