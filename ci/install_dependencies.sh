@@ -5,7 +5,7 @@ set -x
 
 UHAL_VERSION=2.7.7
 UIOUHAL_VERSION="feature-zynqmp_issues"
-APOLLOTOOL_VERSION="master"
+APOLLOTOOL_VERSION="feature-BUTextIO"
 
 if [ "$1" != "app" ]; then
 
