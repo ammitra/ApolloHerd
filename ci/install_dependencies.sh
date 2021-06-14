@@ -5,7 +5,7 @@ set -x
 
 UHAL_VERSION=2.7.7
 UIOUHAL_VERSION="feature-zynqmp_issues"
-APOLLOTOOL_VERSION="feature-BUTextIO"
+APOLLOTOOL_VERSION="master"
 
 if [ "$1" != "app" ]; then
 
@@ -56,7 +56,7 @@ if [ "$1" != "app" ]; then
     yum clean all
 
     # 5) build BUTool from ApolloTool meta repository
-    git clone --branch ${APOLLOTOOL_VERSION} https://github.com/ammitra/ApolloTool.git
+    git clone --branch ${APOLLOTOOL_VERSION} https://github.com/apollo-lhc/ApolloTool.git
     cd ApolloTool
     make init
     rm -rf plugins/IPMC_plugin
