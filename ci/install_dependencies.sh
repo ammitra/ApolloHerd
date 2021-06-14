@@ -59,7 +59,6 @@ if [ "$1" != "app" ]; then
     git clone --branch ${APOLLOTOOL_VERSION} https://github.com/apollo-lhc/ApolloTool.git
     cd ApolloTool
     make init
-    rm -rf plugins/IPMC_plugin
     # 5b) patch BUTool and plugins to use _GLIBCXX_USECXX11_ABI macro
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ -name '*.hh') && \
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ -name '*.h') && \
