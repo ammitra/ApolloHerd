@@ -21,6 +21,9 @@ public:
 
   int dev_cmd(std::string command_args);
 
+  // access ApolloSMDevice pointer's AddStream() method, which calls AddOutputStream from BUTool::RegisterHelper's BUTextIO pointer
+  void AddStream(Level::level level, std::ostream* os);
+
   int read(std::string args);
 
   int svfplayer(std::string SVF_XVC);
