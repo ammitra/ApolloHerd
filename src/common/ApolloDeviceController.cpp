@@ -16,8 +16,8 @@ ApolloDeviceController::~ApolloDeviceController()
 }
 
 void ApolloDeviceController::AddStream(Level::level level, std::ostream* os) {
-  // RegisterHelper has a method AddStream which calls its BUTextIO pointer's method AddOutputStream to add a given ostream* to the proper Controller
-  ptrSMDevice->AddStream(level, os);
+  // calls ApolloSMDevice's AddOutputStrea() method inherited from BUTextIO through CommandListBase
+  ptrSMDevice->AddOutputStream(level, os);
 }
 
 // I think for these, it would be better just to pass vector<string>, vector<uint64_t>

@@ -21,7 +21,7 @@ public:
 
   int dev_cmd(std::string command_args);
 
-  // access ApolloSMDevice pointer's AddStream() method, which calls AddOutputStream from BUTool::RegisterHelper's BUTextIO pointer
+  // access ApolloSMDevice's AddOutputStream() method, inherited from BUTextIO via CommandListBase
   void AddStream(Level::level level, std::ostream* os);
 
   int read(std::string args);
