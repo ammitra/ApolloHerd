@@ -1,9 +1,5 @@
 #include "swatch/apolloherd/ApolloDevice.hpp"
 #include "swatch/apolloherd/commands/ApolloAccess.hpp"
-#include "swatch/apolloherd/commands/Read.hpp"
-#include "swatch/apolloherd/commands/SVFPlayer.hpp"
-#include "swatch/apolloherd/commands/CMPwrUp.hpp"
-#include "swatch/apolloherd/commands/CMPwrDown.hpp"
 #include "swatch/core/Factory.hpp"
 #include "swatch/apolloherd/ApolloDeviceController.hpp"
 
@@ -17,12 +13,8 @@ ApolloDevice::ApolloDevice(const core::AbstractStub& aStub) :
   Device(aStub),
   mController(getStub().uri, getStub().addressTable)
 {
-  // register commands 
+  // register command
   auto& dev_cmd = registerCommand<commands::ApolloAccess>("dev_cmd");
-  auto& read = registerCommand<commands::Read>("read");
-  auto& svfplayer = registerCommand<commands::SVFPlayer>("svfplayer");
-  auto& cmpwrup = registerCommand<commands::CMPwrUp>("cmpwrup");
-  auto& cmpwrdown = registerCommand<commands::CMPwrDown>("cmpwrdown");
 }
 
 ApolloDevice::~ApolloDevice()

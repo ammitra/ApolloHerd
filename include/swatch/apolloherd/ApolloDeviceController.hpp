@@ -3,11 +3,11 @@
 
 #include <string>
 #include <vector>
-#include <ApolloSM_device/ApolloSM_device.hh>
-
 #include <algorithm>    // std::copy
 #include <iterator>     // std::istream_iterator, std::back_inserter
 #include <sstream>      // std::istringstream
+
+#include <ApolloSM_device/ApolloSM_device.hh>
 
 namespace swatch {
 namespace apolloherd {
@@ -19,18 +19,11 @@ public:
 
   ~ApolloDeviceController();
 
+  // access any ApolloSMDevice command
   int dev_cmd(std::string command_args);
 
   // access ApolloSMDevice's AddOutputStream() method, inherited from BUTextIO via CommandListBase
   void AddStream(Level::level level, std::ostream* os);
-
-  int read(std::string args);
-
-  int svfplayer(std::string SVF_XVC);
-
-  int cmpwrup(std::string pwrup_args);
-
-  int cmpwrdown(std::string pwrdown_args);
 
 private:
   BUTool::ApolloSMDevice *ptrSMDevice;
