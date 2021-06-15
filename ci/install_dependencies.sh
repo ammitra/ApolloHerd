@@ -27,7 +27,7 @@ if [ "$1" != "app" ]; then
     yum -y install --exclude *debuginfo \
       cactuscore-uhal-*-${UHAL_VERSION}
     yum clean all
-    export CACTUS_ROOT=/opt/cactus
+    export CACTUS_ROOT=/opt/cactus/
 
     # 3) building UIOuHAL
     git clone --branch ${UIOUHAL_VERSION} https://github.com/dgastler/UIOuHAL.git
