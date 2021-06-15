@@ -15,6 +15,11 @@ ApolloDeviceController::~ApolloDeviceController()
   }
 }
 
+void ApolloDeviceController::AddStream(Level::level level, std::ostream* os) {
+  // calls ApolloSMDevice's AddOutputStrea() method inherited from BUTextIO through CommandListBase
+  ptrSMDevice->AddOutputStream(level, os);
+}
+
 // I think for these, it would be better just to pass vector<string>, vector<uint64_t>
 // since that is what ApolloSMDevice takes, then pass directly to the appropriate command
 // seems simpler?

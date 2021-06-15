@@ -1,6 +1,8 @@
 #ifndef __SWATCH_APOLLOHERD_APOLLODEVICE_HPP__
 #define __SWATCH_APOLLOHERD_APOLLODEVICE_HPP__
 
+#include <sstream>
+
 #include "swatch/action/Device.hpp"
 #include "swatch/apolloherd/ApolloDeviceController.hpp"
 
