@@ -31,7 +31,7 @@ action::Command::State ApolloAccess::code(const core::ParameterSet& aParams)
   // add this stream (via ApolloSMDevice functionality inherited from BUTextIO)
   lController.AddStream(Level::INFO, &oss);
   // perform the command, have output written to oss
-  CommandReturn::status result = lController.dev_cmd(params);
+  int result = lController.dev_cmd(params);
 
   // check CommandReturn status
   if (result == CommandReturn::status::NOT_FOUND)
