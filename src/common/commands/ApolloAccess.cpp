@@ -31,11 +31,12 @@ action::Command::State ApolloAccess::code(const core::ParameterSet& aParams)
   // add this stream (via ApolloSMDevice functionality inherited from BUTextIO)
   lController.AddStream(Level::INFO, &oss);
   // perform the command, have output written to oss
+  CommandReturn::status result = lController.dev_cmd(params);
 
-
-  if (lController.dev_cmd(params) == CommandReturn::status::NOT_FOUND)
+  // compare the command result
+  if (result == CommandReturn::status::NOT_FOUND)
     throw core::RuntimeError("command not found");
-  else if (lController.dev_cmd(params) == CommandReturn::status::BAD_ARGS)
+  else if (result == CommandReturn::status::BAD_ARGS)
     throw core::RuntimeError("bad arguments");
   else
     lState = kDone;
