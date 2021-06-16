@@ -25,10 +25,6 @@ target_sources(ApolloHerd PRIVATE
     src/common/ApolloDeviceController.cpp
     src/common/ApolloDevice.cpp
     src/common/commands/ApolloAccess.cpp
-    src/common/commands/CMPwrDown.cpp
-    src/common/commands/CMPwrUp.cpp
-    src/common/commands/Read.cpp
-    src/common/commands/SVFPlayer.cpp
     )
 
 target_include_directories(ApolloHerd
