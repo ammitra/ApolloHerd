@@ -4,7 +4,7 @@ set -e
 set -x 
 
 UHAL_VERSION=2.7.7
-UIOUHAL_VERSION="feature-zynqmp_issues"
+UIOUHAL_VERSION="develop"
 APOLLOTOOL_VERSION="master"
 
 if [ "$1" != "app" ]; then
@@ -30,7 +30,7 @@ if [ "$1" != "app" ]; then
     export CACTUS_ROOT=/opt/cactus/
 
     # 3) building UIOuHAL
-    git clone --branch ${UIOUHAL_VERSION} https://github.com/dgastler/UIOuHAL.git
+    git clone --branch ${UIOUHAL_VERSION} https://github.com/BU-Tools/UIOuHAL.git
     # 3b) patch UIOuHAL to use _GLIBCXX_USE_CXX11_ABI macro
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./UIOuHAL -name '*.hpp') && \
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./UIOuHAL -name '*.cpp') && \
