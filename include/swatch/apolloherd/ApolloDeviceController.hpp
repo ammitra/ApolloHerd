@@ -3,16 +3,18 @@
 
 #include <string>
 #include <vector>
-#include <ApolloSM_device/ApolloSM_device.hh>
-
 #include <algorithm>    // std::copy
 #include <iterator>     // std::istream_iterator, std::back_inserter
 #include <sstream>      // std::istringstream
 
+#include "emp/swatch/EMPDevice.hpp"
+
+#include <ApolloSM_device/ApolloSM_device.hh>
+
 namespace swatch {
 namespace apolloherd {
 
-class ApolloDeviceController {
+class ApolloDeviceController : public emp::swatch::EMPDevice {
 public:
 
   ApolloDeviceController(const std::string& aURI, const std::string& aAddrTable);
