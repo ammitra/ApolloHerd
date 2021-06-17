@@ -9,6 +9,14 @@ project(ApolloHerd VERSION 0.0.1
 # herd library
 find_package(swatch 0.3.0 REQUIRED)
 
+#######################################################
+# Add subdirectories for dependencies
+#######################################################
+# Use pre-CXX11 ABI to resolve linker errors with gcc 8.3.0 on arm/v7
+# See https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dual_abi.html
+add_compile_definitions(_GLIBCXX_USE_CXX11_ABI=0)
+add_subdirectory(emp-herd)
+
 # paths to Apollo and Cactus
 SET(APOLLO_PATH "/opt/BUTool")
 SET(CACTUS_PATH "/opt/cactus")
@@ -45,6 +53,7 @@ target_link_directories(ApolloHerd PUBLIC
 
 target_link_libraries(ApolloHerd
     SWATCH::swatch_action
+    emp_swatch
     BUTool_ApolloSM
     BUTool_ApolloSMDevice
     BUTool_GenericIPBus
