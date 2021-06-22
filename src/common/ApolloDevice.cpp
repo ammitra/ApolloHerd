@@ -15,10 +15,6 @@ ApolloDevice::ApolloDevice(const core::AbstractStub& aStub) :
 {
   // register commands 
   auto& dev_cmd = registerCommand<commands::ApolloAccess>("dev_cmd");
-  auto& read = registerCommand<commands::Read>("read");
-  auto& svfplayer = registerCommand<commands::SVFPlayer>("svfplayer");
-  auto& cmpwrup = registerCommand<commands::CMPwrUp>("cmpwrup");
-  auto& cmpwrdown = registerCommand<commands::CMPwrDown>("cmpwrdown");
 }
 
 ApolloDevice::~ApolloDevice()
