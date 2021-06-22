@@ -30,6 +30,7 @@ if [ "$1" != "app" ]; then
     export CACTUS_ROOT=/opt/cactus/
 
     # 3) build EMP software & toolbox
+    cp emp-herd/ci/*.repo /etc/yum.repos.d/
     source emp-herd/ci/install_dependencies.sh
 
     # 4) building UIOuHAL
