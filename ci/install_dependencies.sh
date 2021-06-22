@@ -27,13 +27,13 @@ if [ "$1" != "app" ]; then
     yum -y install --exclude *debuginfo \
       cactuscore-uhal-*-${UHAL_VERSION}
     yum clean all
-    export CACTUS_ROOT=/opt/cactus/
 
     # 3) build EMP software & toolbox
     cp emp-herd/ci/*.repo /etc/yum.repos.d/
     source emp-herd/ci/install_dependencies.sh
 
     # 4) building UIOuHAL
+    export CACTUS_ROOT=/opt/cactus/
     git clone --branch ${UIOUHAL_VERSION} https://github.com/BU-Tools/UIOuHAL.git
     # 4b) patch UIOuHAL to use _GLIBCXX_USE_CXX11_ABI macro
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./UIOuHAL -name '*.hpp') && \
