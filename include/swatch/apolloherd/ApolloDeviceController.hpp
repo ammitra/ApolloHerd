@@ -23,8 +23,6 @@ public:
 
   int ApolloAccess(std::string command_args);
 
-  int Program()
-
   // access ApolloSMDevice's AddOutputStream() method, inherited from BUTextIO via CommandListBase
   void AddStream(Level::level level, std::ostream* os);
 
