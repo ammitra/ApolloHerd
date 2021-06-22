@@ -29,9 +29,12 @@ if [ "$1" != "app" ]; then
     yum clean all
     export CACTUS_ROOT=/opt/cactus/
 
-    # 3) building UIOuHAL
+    # 3) build EMP software & toolbox
+    source emp-herd/ci/install_dependencies.sh
+
+    # 4) building UIOuHAL
     git clone --branch ${UIOUHAL_VERSION} https://github.com/BU-Tools/UIOuHAL.git
-    # 3b) patch UIOuHAL to use _GLIBCXX_USE_CXX11_ABI macro
+    # 4b) patch UIOuHAL to use _GLIBCXX_USE_CXX11_ABI macro
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./UIOuHAL -name '*.hpp') && \
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./UIOuHAL -name '*.cpp') && \
     # build
@@ -43,7 +46,7 @@ if [ "$1" != "app" ]; then
     cd ..
     rm -rf UIOuHAL
 
-    # 4) install dependencies of BUTool
+    # 5) install dependencies of BUTool
     yum -y install boost-chrono \
         boost-regex \
         boost-thread \
@@ -55,16 +58,16 @@ if [ "$1" != "app" ]; then
 
     yum clean all
 
-    # 5) build BUTool from ApolloTool meta repository
+    # 6) build BUTool from ApolloTool meta repository
     git clone --branch ${APOLLOTOOL_VERSION} https://github.com/ammitra/ApolloTool.git
     cd ApolloTool
     make init
-    # 5b) patch BUTool and plugins to use _GLIBCXX_USECXX11_ABI macro
+    # 6b) patch BUTool and plugins to use _GLIBCXX_USECXX11_ABI macro
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ -name '*.hh') && \
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ -name '*.h') && \
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ -name '*.cxx') && \
     sed -i '1 i\#define _GLIBCXX_USE_CXX11_ABI 0' $(find ./ -name '*.cc') && \
-    # 5c) patch ApolloSM_plugin Makefile to deal with strange format-truncation error (append -Wno-format-trunctation to CXX_FLAGS variable)
+    # 6c) patch ApolloSM_plugin Makefile to deal with strange format-truncation error (append -Wno-format-trunctation to CXX_FLAGS variable)
     sed -i "s|-Wno-ignored-qualifiers|-Wno-ignored-qualifiers -Wno-format-truncation|g" plugins/ApolloSM_plugin/Makefile
     # time to build
     make local -j$(nproc) RUNTIME_LDPATH=/opt/BUTool COMPILETIME_ROOT=--sysroot=/
