@@ -24,7 +24,7 @@ public:
   int ApolloAccess(std::string command_args);
 
   // program the FPGA via ApolloSM's svfplayer() function
-  int Program(std::string const & svfFile, std::string const & XVCLabel);
+  int Program(std::string svfFile_XVCLabel);
 
   // access ApolloSMDevice's AddOutputStream() method, inherited from BUTextIO via CommandListBase
   void AddStream(Level::level level, std::ostream* os);

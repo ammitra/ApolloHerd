@@ -35,11 +35,12 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
   setProgress(0.3, "Programming FPGA via svfplayer");
   std::string svfFile = lBuildProducts.programmingFile;
   std::string XVCLabel = aParams.get<std::string>("XVCLabel");
+  std::string args = svfFile + ' ' + XVCLabel;
   // initialize stringstream, add it to ApolloSMDevice
   std::ostringstream oss;
   lController.AddStream(Level::INFO, &oss);
   // run the command, get the result
-  int result = lController.Program(svfFile, XVCLabel);
+  int result = lController.Program(args);
 
   // 3) compare command result
   // probably need to add a few more here - will do after i understand how svfplayer works and what it returns

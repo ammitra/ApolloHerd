@@ -33,9 +33,17 @@ int ApolloDeviceController::ApolloAccess(std::string command_args)
   return ptrSMDevice->EvaluateCommand(CommandArgs);
 }
 
-int ApolloDeviceController::Program(std::string const & svfFile, std::string const & XVCLabel)
+int ApolloDeviceController::Program(std::string svfFile_XVCLabel)
 {
-  return ptrSMDevice->svfplayer(svfFile, XVCLabel);
+  std::istringstream iss(svfFile_XVCLabel);
+  // initialize vector of strings with command name
+  std::vector<std::string> SVFPlayerArgs {"svfplayer"};
+  // add the SVF file and XVC label strings to vector
+  std::copy(std::istream_iterator<std::string>(iss),
+            std::istream_iterator<std::string>(),
+            std::back_inserter(SVFPlayerArgs));
+  // call the appropriate ApolloSMDevice command
+  return ptrSMDevice->svfplayer(SVFPlayerArgs);
 }
 
 
