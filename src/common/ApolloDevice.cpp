@@ -15,6 +15,7 @@ ApolloDevice::ApolloDevice(const core::AbstractStub& aStub) :
 {
   // register commands 
   auto& ApolloAccess = registerCommand<commands::ApolloAccess>("ApolloAccess");
+  auto& Program = registerCommand<commands::Program>("Program");
 }
 
 ApolloDevice::~ApolloDevice()

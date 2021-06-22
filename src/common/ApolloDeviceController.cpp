@@ -33,6 +33,11 @@ int ApolloDeviceController::ApolloAccess(std::string command_args)
   return ptrSMDevice->EvaluateCommand(CommandArgs);
 }
 
+int ApolloDeviceController::Program(std::string const & svfFile, std::string const & XVCLabel)
+{
+  return ptrSMDevice->svfplayer(svfFile, XVCLabel);
+}
+
 
 }   // apolloherd
 }   // swatch
