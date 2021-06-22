@@ -14,7 +14,7 @@ ApolloDevice::ApolloDevice(const core::AbstractStub& aStub) :
   mController(getStub().uri, getStub().addressTable, aStub)
 {
   // register commands 
-  auto& dev_cmd = registerCommand<commands::ApolloAccess>("dev_cmd");
+  auto& ApolloAccess = registerCommand<commands::ApolloAccess>("ApolloAccess");
 }
 
 ApolloDevice::~ApolloDevice()

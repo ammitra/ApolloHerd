@@ -21,7 +21,7 @@ void ApolloDeviceController::AddStream(Level::level level, std::ostream* os) {
   ptrSMDevice->AddOutputStream(level, os);
 }
 
-int ApolloDeviceController::dev_cmd(std::string command_args)
+int ApolloDeviceController::ApolloAccess(std::string command_args)
 {
   // split command_args into constituent parts
   // https://stackoverflow.com/a/20114104
