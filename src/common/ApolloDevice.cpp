@@ -1,9 +1,5 @@
 #include "swatch/apolloherd/ApolloDevice.hpp"
 #include "swatch/apolloherd/commands/ApolloAccess.hpp"
-#include "swatch/apolloherd/commands/Read.hpp"
-#include "swatch/apolloherd/commands/SVFPlayer.hpp"
-#include "swatch/apolloherd/commands/CMPwrUp.hpp"
-#include "swatch/apolloherd/commands/CMPwrDown.hpp"
 #include "swatch/core/Factory.hpp"
 #include "swatch/apolloherd/ApolloDeviceController.hpp"
 
