@@ -33,6 +33,7 @@ target_sources(ApolloHerd PRIVATE
     src/common/ApolloDeviceController.cpp
     src/common/ApolloDevice.cpp
     src/common/commands/ApolloAccess.cpp
+    src/common/commands/Program.cpp
     )
 
 target_include_directories(ApolloHerd
