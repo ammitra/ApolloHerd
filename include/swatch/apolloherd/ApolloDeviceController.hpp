@@ -17,7 +17,7 @@ namespace apolloherd {
 class ApolloDeviceController : public emp::swatch::EMPDevice {
 public:
 
-  ApolloDeviceController(const std::string& aURI, const std::string& aAddrTable);
+  ApolloDeviceController(const std::string& aURI, const std::string& aAddrTable, const swatch::core::AbstractStub& aStub);
 
   ~ApolloDeviceController();
 

@@ -15,7 +15,7 @@ namespace apolloherd {
 
 ApolloDevice::ApolloDevice(const core::AbstractStub& aStub) :
   Device(aStub),
-  mController(getStub().uri, getStub().addressTable)
+  mController(getStub().uri, getStub().addressTable, aStub)
 {
   // register commands 
   auto& dev_cmd = registerCommand<commands::ApolloAccess>("dev_cmd");

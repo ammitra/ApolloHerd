@@ -3,7 +3,8 @@
 namespace swatch {
 namespace apolloherd {
 
-ApolloDeviceController::ApolloDeviceController(const std::string& aURI, const std::string& aAddrTable)
+ApolloDeviceController::ApolloDeviceController(const std::string& aURI, const std::string& aAddrTable, const swatch::core::AbstractStub& aStub) :
+  EMPDevice(aStub)
 {
   ptrSMDevice = new BUTool::ApolloSMDevice(arg);
 }
