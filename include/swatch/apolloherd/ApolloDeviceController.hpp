@@ -7,24 +7,19 @@
 #include <iterator>     // std::istream_iterator, std::back_inserter
 #include <sstream>      // std::istringstream
 
-#include "emp/swatch/EMPDevice.hpp"
-
 #include <ApolloSM_device/ApolloSM_device.hh>
 
 namespace swatch {
 namespace apolloherd {
 
-class ApolloDeviceController : public emp::swatch::EMPDevice {
+class ApolloDeviceController {
 public:
 
-  ApolloDeviceController(const std::string& aURI, const std::string& aAddrTable, const swatch::core::AbstractStub& aStub);
+  ApolloDeviceController(const std::string& aURI, const std::string& aAddrTable);
 
   ~ApolloDeviceController();
 
   int ApolloAccess(std::string command_args);
-
-  // program the FPGA via ApolloSM's svfplayer() function
-  int Program(std::string svfFile_XVCLabel);
 
   // access ApolloSMDevice's AddOutputStream() method, inherited from BUTextIO via CommandListBase
   void AddStream(Level::level level, std::ostream* os);

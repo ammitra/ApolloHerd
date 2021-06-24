@@ -3,8 +3,7 @@
 namespace swatch {
 namespace apolloherd {
 
-ApolloDeviceController::ApolloDeviceController(const std::string& aURI, const std::string& aAddrTable, const swatch::core::AbstractStub& aStub) :
-  EMPDevice(aStub)
+ApolloDeviceController::ApolloDeviceController(const std::string& aURI, const std::string& aAddrTable)
 {
   ptrSMDevice = new BUTool::ApolloSMDevice(arg);
 }
@@ -32,20 +31,6 @@ int ApolloDeviceController::ApolloAccess(std::string command_args)
             std::back_inserter(CommandArgs));
   return ptrSMDevice->EvaluateCommand(CommandArgs);
 }
-
-int ApolloDeviceController::Program(std::string svfFile_XVCLabel)
-{
-  std::istringstream iss(svfFile_XVCLabel);
-  // initialize vector of strings with command name
-  std::vector<std::string> SVFPlayerArgs {std::string("svfplayer")};
-  // add the SVF file and XVC label strings to vector
-  std::copy(std::istream_iterator<std::string>(iss),
-            std::istream_iterator<std::string>(),
-            std::back_inserter(SVFPlayerArgs));
-  // call the appropriate ApolloSMDevice command
-  return ptrSMDevice->EvaluateCommand(SVFPlayerArgs);
-}
-
 
 }   // apolloherd
 }   // swatch
