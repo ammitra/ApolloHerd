@@ -12,11 +12,10 @@ namespace apolloherd {
 
 ApolloDevice::ApolloDevice(const core::AbstractStub& aStub) :
   Device(aStub),
-  mController(getStub().uri, getStub().addressTable, aStub)
+  mController(getStub().uri, getStub().addressTable)
 {
   // register commands 
   auto& ApolloAccess = registerCommand<commands::ApolloAccess>("ApolloAccess");
-  auto& Program = registerCommand<commands::Program>("Program");
 }
 
 ApolloDevice::~ApolloDevice()
