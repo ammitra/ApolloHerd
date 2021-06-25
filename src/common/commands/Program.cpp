@@ -10,7 +10,7 @@ namespace commands {
 Program::Program(const std::string& aId, action::ActionableObject& aActionable) :
   Command(aId, aActionable, std::string())
 {
-  registerParameter<action::File>("packagePath", { "/path/to/package.tgz", "package.tgz"});
+  registerParameter<swatch::action::File>("packagePath", { "/path/to/package.tgz", "package.tgz"});
   
   registerParameter<std::string>("XVCLabel","");  // might just be able to hard-code
   
