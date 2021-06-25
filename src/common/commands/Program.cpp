@@ -33,17 +33,18 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
   // 1) Extract the tarball (using refactored EMP utilities code)
   setProgress(0., "Extracting FW package");
   using emp::swatch::utilities::extractFirmwarePackage;
-  const auto lBuildProducts = extractFirmwarePackage(aParams.get<action::file>("package").getPath(),
+  const auto lBuildProducts = extractFirmwarePackage(aParams.get<action::File>("package").getPath(),
                                                       ".svf",
                                                       aParams.get<std::string>("addressTable"));
   
   // 2) Power up the FPGA (maybe this should be its own ApolloCMFGPA::CMPowerUp command??)
   std::string CMID;
   switch (ApolloCM.getFPGA()) {
-    case 0:
+    //  NOTE : might need to change this statement depending on which FPGA has which CMID
+    case KINTEX:
       CMID = "0";
       break;
-    case 1:
+    case VIRTEX:
       CMID = "1";
       break;
   }
