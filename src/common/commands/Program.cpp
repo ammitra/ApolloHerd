@@ -11,7 +11,9 @@ Program::Program(const std::string& aId, action::ActionableObject& aActionable) 
   Command(aId, aActionable, std::string())
 {
   registerParameter<action::File>("packagePath", { "/path/to/package.tgz", "package.tgz"});
-  registerParameter<std::string>("XVCLabel","");
+  
+  registerParameter<std::string>("XVCLabel","");  // might just be able to hard-code
+  
   registerParameter<std::string>("addressTable", "top.xml");
 }
 
@@ -21,8 +23,12 @@ Program::~Program()
 
 action::Command::State Program::code(const core::ParameterSet& aParams)
 {
-  // get the Controller to be able to access ApolloSMDevice functions
-  ApolloDeviceController& lController = getActionable<ApolloDevice>().getController();
+  // get an ApolloCMFPGA 
+  ApolloCMFPGA& ApolloCM = getActionable<ApolloCMFPGA>();
+
+  // Give stringstream to ApolloSMDevice
+  std::ostringstream oss;
+  ApolloCM.AddStream(Level::INFO, &oss);
 
   // 1) Extract the tarball (using refactored EMP utilities code)
   setProgress(0., "Extracting FW package");
@@ -31,30 +37,45 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
                                                       ".svf",
                                                       aParams.get<std::string>("addressTable"));
   
-  // 2) Program the FPGA (using SVFplayer from ApolloSM)
-  setProgress(0.3, "Programming FPGA via svfplayer");
-  std::string svfFile = lBuildProducts.programmingFile;
-  std::string XVCLabel = aParams.get<std::string>("XVCLabel");
-  std::string args = svfFile + ' ' + XVCLabel;
-  // initialize stringstream, add it to ApolloSMDevice
-  std::ostringstream oss;
-  lController.AddStream(Level::INFO, &oss);
-  // run the command, get the result
-  int result = lController.Program(args);
+  // 2) Power up the FPGA (maybe this should be its own ApolloCMFGPA::CMPowerUp command??)
+  std::string CMID;
+  switch (ApolloCM.getFPGA()) {
+    case 0:
+      CMID = "0";
+      break;
+    case 1:
+      CMID = "1";
+      break;
+  }
+  setProgress(0.3, "Powering up CM" + CMID);
+  // cmpwrup command will return success regardless of whether CM powered up -> need to add BUTextIO to ApolloSMDevice::CMPowerUp
+  ApolloCMFPGA.ApolloAccess("cmpwrup "+CMID); // use default wait time (1s)
 
-  // 3) compare command result
+  // 3) Program the FPGA (using svfplayer from ApolloSMDevice -> ApolloSM)
+  SetProgress(0.6, "Programming CM" + CMID + " via svfplayer");
+  std::string svfplayer("svfplayer");
+  // add svfile and xvclabel strings to command and argument string 
+  std::string svfFile = lBuildProducts.programmingFile; 
+  std::string XVCLabel = aParams.get<std::string>("XVCLabel");
+  std::string command_and_args = svfplayer + " " + svfFile + " " + XVCLabel;
+  // pass svfplayer command and args to EvaluateCommand via ApolloAccess
+  int result = ApolloCMFPGA.ApolloAccess(command_and_args);
+
+  // 4) compare command result
   // probably need to add a few more here - will do after i understand how svfplayer works and what it returns
   if (result == CommandReturn::status::BAD_ARGS)
     throw core::RuntimeError("bad arguments")
 
-  // 4) Update address table used by EMP commands
-  setProgress(0.6, "Updating address table");
-  lController.replaceController("file://" + lBuildProducts.addressTable);
+  // 5) Update address table used by EMP commands
+  setProgress(0.9, "Updating address table");
+  ApolloCMFPGA.replaceController("file://" + lBuildProducts.addressTable);
 
-  // 5) Read build metadata and run simple checks
+/*
+  // 6) Read build metadata and run simple checks
   setProgress(0.9, "Reading build metadata");
-  lController.checkFirmware([&] (const std::string& x) { return this->setStatusMsg(x); });
-  
+  lController.checkFirmware([&] (const std::string& x) { return this->setStatusMsg(x); })
+*/  
+
   return State::kDone;
 }
 
