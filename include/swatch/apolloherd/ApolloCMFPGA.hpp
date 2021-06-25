@@ -8,6 +8,7 @@
 #include <sstream>
 
 #include "emp/swatch/EMPDevice.hpp"
+#include "swatch/apolloherd/FPGA.hpp"
 #include <ApolloSM_device/ApolloSM_device.hh>
 
 namespace swatch {
@@ -20,16 +21,9 @@ public:
   // use to call any relevant CM commands
   int ApolloAccess(std::string command_args);
   void AddStream(Level::level level, std::ostream* os);
-  ApolloCMFPGA::FPGA getFPGA();
+  FPGA getFPGA();
 private:
   void retrieveMetricValues() override; // implement but don't define
-
-  // determine which FPGA this class represents
-  // might need to change order depending on which FPGA has which CM ID
-  enum class FPGA {
-    KINTEX = 0,
-    VIRTEX = 1
-  };
 
   FPGA mFPGA;
 
