@@ -1,5 +1,5 @@
 #include "swatch/apolloherd/commands/Program.hpp"
-#include "swatch/apolloherd/ApolloDevice.hpp"
+#include "swatch/apolloherd/ApolloCMFPGA.hpp"
 
 #include <BUTool/CommandReturn.hh>
 
