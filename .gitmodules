@@ -1,3 +1,0 @@
-[submodule "emp-herd"]
-	path = emp-herd
-	url = https://gitlab.cern.ch/p2-xware/software/emp-herd.git
