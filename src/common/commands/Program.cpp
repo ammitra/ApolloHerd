@@ -2,6 +2,7 @@
 #include "swatch/apolloherd/ApolloCMFPGA.hpp"
 
 #include "swatch/action/File.hpp"
+#include "emp/swatch/utilities.hpp"
 
 #include <BUTool/CommandReturn.hh>
 
@@ -69,7 +70,7 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
   // 4) compare command result
   // probably need to add a few more here - will do after i understand how svfplayer works and what it returns
   if (result == CommandReturn::status::BAD_ARGS)
-    throw core::RuntimeError("bad arguments")
+    throw core::RuntimeError("bad arguments");
 
   // 5) Update address table used by EMP commands
   setProgress(0.9, "Updating address table");
