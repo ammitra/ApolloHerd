@@ -1,7 +1,9 @@
 #include "swatch/apolloherd/commands/Program.hpp"
-//#include "swatch/apolloherd/ApolloCMFPGA.hpp"
+#include "swatch/apolloherd/ApolloCMFPGA.hpp"
 
-//#include <BUTool/CommandReturn.hh>
+#include "swatch/action/File.hpp"
+
+#include <BUTool/CommandReturn.hh>
 
 namespace swatch {
 namespace apolloherd {
@@ -25,7 +27,6 @@ Program::~Program()
 
 action::Command::State Program::code(const core::ParameterSet& aParams)
 {
-/*
   // get an ApolloCMFPGA 
   ApolloCMFPGA& ApolloCM = getActionable<ApolloCMFPGA>();
 
@@ -81,7 +82,6 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
 
 
   return State::kDone;
-*/
 }
 
 }   // commands
