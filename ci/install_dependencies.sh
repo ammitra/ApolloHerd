@@ -5,7 +5,7 @@ set -x
 
 UHAL_VERSION=2.8.1
 UIOUHAL_VERSION="develop"
-APOLLOTOOL_VERSION="uhal_versioning_change"
+APOLLOTOOL_VERSION="master"
 
 if [ "$1" != "app" ]; then
 
@@ -58,7 +58,7 @@ if [ "$1" != "app" ]; then
     yum clean all
 
     # 5) build BUTool from ApolloTool meta repository
-    git clone --branch ${APOLLOTOOL_VERSION} https://github.com/ammitra/ApolloTool.git
+    git clone --branch ${APOLLOTOOL_VERSION} https://github.com/apollo-lhc/ApolloTool.git
     cd ApolloTool
     make init
     # 5b) patch BUTool and plugins to use _GLIBCXX_USECXX11_ABI macro
