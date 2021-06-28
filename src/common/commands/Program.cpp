@@ -40,10 +40,10 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
   std::string CMID;
   switch (ApolloCM.getFPGA()) {
     //  NOTE : might need to change this statement depending on which FPGA has which CMID
-    case KINTEX:
+    case FPGA::KINTEX:
       CMID = "0";
       break;
-    case VIRTEX:
+    case FPGA::VIRTEX:
       CMID = "1";
       break;
   }
