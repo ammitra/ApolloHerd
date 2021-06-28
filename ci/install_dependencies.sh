@@ -3,7 +3,7 @@
 set -e
 set -x 
 
-UHAL_VERSION=2.7.7
+UHAL_VERSION=2.8.1
 UIOUHAL_VERSION="develop"
 APOLLOTOOL_VERSION="uhal_versioning_change"
 
@@ -28,6 +28,8 @@ if [ "$1" != "app" ]; then
       cactuscore-uhal-*-${UHAL_VERSION}
     yum clean all
     export CACTUS_ROOT=/opt/cactus/
+    export UHAL_VER_MAJOR=2
+    export UHAL_VER_MINOR=8
 
     # 3) building UIOuHAL
     git clone --branch ${UIOUHAL_VERSION} https://github.com/BU-Tools/UIOuHAL.git
