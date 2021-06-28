@@ -52,7 +52,7 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
   ApolloCM.ApolloAccess("cmpwrup "+CMID); // use default wait time (1s)
 
   // 3) Program the FPGA (using svfplayer from ApolloSMDevice -> ApolloSM)
-  SetProgress(0.6, "Programming CM" + CMID + " via svfplayer");
+  setProgress(0.6, "Programming CM" + CMID + " via svfplayer");
   std::string svfplayer("svfplayer");
   // add svfile and xvclabel strings to command and argument string 
   std::string svfFile = lBuildProducts.programmingFile; 
