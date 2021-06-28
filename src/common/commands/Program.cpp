@@ -1,10 +1,4 @@
 #include "swatch/apolloherd/commands/Program.hpp"
-#include "swatch/apolloherd/ApolloCMFPGA.hpp"
-
-#include "swatch/action/File.hpp"
-#include "emp/swatch/utilities.hpp"
-
-#include <BUTool/CommandReturn.hh>
 
 namespace swatch {
 namespace apolloherd {

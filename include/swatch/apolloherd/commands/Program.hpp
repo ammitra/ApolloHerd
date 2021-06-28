@@ -2,6 +2,11 @@
 #define __SWATCH_APOLLOHERD_COMMANDS_PROGRAM_HPP__
 
 #include "swatch/action/Command.hpp"
+#include "swatch/action/File.hpp"
+#include "emp/swatch/utilities.hpp"
+
+#include "swatch/apolloherd/ApolloCMFPGA.hpp"
+#include <BUTool/CommandReturn.hh>
 
 namespace swatch {
 namespace apolloherd {
