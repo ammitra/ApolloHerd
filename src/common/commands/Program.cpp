@@ -1,7 +1,7 @@
 #include "swatch/apolloherd/commands/Program.hpp"
-#include "swatch/apolloherd/ApolloCMFPGA.hpp"
+//#include "swatch/apolloherd/ApolloCMFPGA.hpp"
 
-#include <BUTool/CommandReturn.hh>
+//#include <BUTool/CommandReturn.hh>
 
 namespace swatch {
 namespace apolloherd {
@@ -23,6 +23,7 @@ Program::~Program()
 
 action::Command::State Program::code(const core::ParameterSet& aParams)
 {
+/*
   // get an ApolloCMFPGA 
   ApolloCMFPGA& ApolloCM = getActionable<ApolloCMFPGA>();
 
@@ -71,13 +72,14 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
   setProgress(0.9, "Updating address table");
   ApolloCMFPGA.replaceController("file://" + lBuildProducts.addressTable);
 
-/*
+
   // 6) Read build metadata and run simple checks
-  setProgress(0.9, "Reading build metadata");
-  lController.checkFirmware([&] (const std::string& x) { return this->setStatusMsg(x); })
-*/  
+  //setProgress(0.9, "Reading build metadata");
+  //lController.checkFirmware([&] (const std::string& x) { return this->setStatusMsg(x); })
+
 
   return State::kDone;
+*/
 }
 
 }   // commands
