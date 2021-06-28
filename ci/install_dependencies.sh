@@ -5,7 +5,7 @@ set -x
 
 UHAL_VERSION=2.8.1
 UIOUHAL_VERSION="develop"
-APOLLOTOOL_VERSION="UIOuHALversioning"
+APOLLOTOOL_VERSION="UHALversioning"
 
 if [ "$1" != "app" ]; then
 
