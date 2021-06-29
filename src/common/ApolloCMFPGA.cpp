@@ -1,5 +1,7 @@
 #include "swatch/apolloherd/ApolloCMFPGA.hpp"
 #include "swatch/apolloherd/commands/Program.hpp"
+#include "swatch/apolloherd/commands/PowerUp.hpp"
+#include "swatch/apolloherd/commands/PowerDown.hpp"
 #include "swatch/core/Factory.hpp"
 
 SWATCH_REGISTER_CLASS(swatch::apolloherd::ApolloCMFPGA)
@@ -18,6 +20,8 @@ ApolloCMFPGA::ApolloCMFPGA(const swatch::core::AbstractStub& aStub) : EMPDevice(
   SMDevice = new BUTool::ApolloSMDevice(arg);
   
   registerCommand<commands::Program>("program");
+  registerCommand<commands::PowerUp>("powerUp");
+  registerCommand<commands::PowerDown>("powerDown");
 }
 
 ApolloCMFPGA::~ApolloCMFPGA() {
@@ -26,7 +30,7 @@ ApolloCMFPGA::~ApolloCMFPGA() {
   }
 }
 
-int ApolloCMFGPA::ApolloAccess(std::string command_args) {
+int ApolloCMFPGA::ApolloAccess(std::string command_args) {
   std::istringstream iss(command_args);
   std::vector<std::string> CommandArgs;
   std::copy(std::istream_iterator<std::string>(iss),
