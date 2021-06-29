@@ -30,6 +30,8 @@ pathadd LD_LIBRARY_PATH "/opt/BUTool/lib/"
 # adding libherd_app.so
 pathadd LD_LIBRARY_PATH "/usr/local/lib"
 
+pathadd LD_LIBRARY_PATH "/opt/cactus/lib"
+
 export LD_LIBRARY_PATH
 
 #export SWATCH_LOG4CPLUS_CONFIG=${BASE_DIR}/herd-library/log4cplus.properties
