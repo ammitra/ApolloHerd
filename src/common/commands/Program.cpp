@@ -36,7 +36,7 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
                                                       ".svf",
                                                       aParams.get<std::string>("addressTable"));
   
-  // 2) Power up the FPGA (maybe this should be its own ApolloCMFGPA::CMPowerUp command??)
+  // 2) Power up the FPGA (this should probably be done outside of the function - i.e. call PowerUp first)
   std::string CMID;
   switch (ApolloCM.getFPGA()) {
     //  NOTE : might need to change this statement depending on which FPGA has which CMID
