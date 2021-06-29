@@ -32,6 +32,8 @@ add_library(ApolloHerd SHARED)
 target_sources(ApolloHerd PRIVATE
     src/common/ApolloDeviceController.cpp
     src/common/ApolloDevice.cpp
+    src/common/ApolloCMFPGA.cpp
+
     src/common/commands/ApolloAccess.cpp
     src/common/commands/Program.cpp
     )
