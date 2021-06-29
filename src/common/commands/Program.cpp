@@ -73,7 +73,7 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
 
   // 6) Read build metadata and run simple checks
   setProgress(0.9, "Reading build metadata");
-  ApolloCM.checkFirmware([&] (const std::string& x) { return this->setStatusMsg(x); })
+  ApolloCM.checkFirmware([&] (const std::string& x) { return this->setStatusMsg(x); });
 
   return State::kDone;
 }
