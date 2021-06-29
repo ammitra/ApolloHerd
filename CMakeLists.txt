@@ -36,6 +36,8 @@ target_sources(ApolloHerd PRIVATE
 
     src/common/commands/ApolloAccess.cpp
     src/common/commands/Program.cpp
+    src/common/commands/PowerUp.cpp
+    src/common/commands/PowerDown.cpp
     )
 
 target_include_directories(ApolloHerd
