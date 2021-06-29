@@ -1,4 +1,4 @@
-#include "swatch/apolloherd/ApolloCMFGPA.hpp"
+#include "swatch/apolloherd/ApolloCMFPGA.hpp"
 #include "swatch/apolloherd/commands/Program.hpp"
 #include "swatch/core/Factory.hpp"
 
