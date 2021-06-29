@@ -8,3 +8,11 @@ devices:
     class: swatch::apolloherd::ApolloDevice
     uri: blah:///dev/fileA
     addressTable: /path/to/addressTableA.xml
+  - id: kintex
+    class: swatch::apolloherd::ApolloCMFPGA
+    uri: blah:///dev/fileB
+    addressTable: /path/to/addressTableB.xml
+  - id: virtex
+    class: swatch::apolloherd::ApolloCMFPGA
+    uri: blah:///dev/fileC
+    addressTable: /path/to/addressTableC.xml
