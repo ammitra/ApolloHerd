@@ -17,7 +17,7 @@ PowerDown::~PowerDown()
 // See PowerUp for all the things that currently need to change with ApolloSMDevice
 action::Command::State PowerDown::code(const core::ParameterSet& aParams)
 {
-  ApolloCMFPGA& ApolloCM = getActionable<ApolloCMFGPA>();
+  ApolloCMFPGA& ApolloCM = getActionable<ApolloCMFPGA>();
 
   std::ostringstream oss;
   ApolloCM.AddStream(Level::INFO, &oss);

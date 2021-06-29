@@ -17,7 +17,7 @@ PowerUp::~PowerUp()
 action::Command::State PowerUp::code(const core::ParameterSet& aParams) 
 {
   // get the ApolloCMFPGA
-  ApolloCMFPGA& ApolloCM = getActionable<ApolloCMFGPA>();
+  ApolloCMFPGA& ApolloCM = getActionable<ApolloCMFPGA>();
 
   // give stringstream to ApolloSMDevice (WIP)
   /*
