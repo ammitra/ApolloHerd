@@ -43,6 +43,10 @@ void ApolloCMFPGA::AddStream(Level::level level, std::ostream* os) {
   SMDevice->AddOutputStream(level, os);
 }
 
+void ApolloCMFPGA::retrieveMetricValues()
+{
+}
+
 FPGA ApolloCMFPGA::getFPGA() {
   return mFPGA;
 }
