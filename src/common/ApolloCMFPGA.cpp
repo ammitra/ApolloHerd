@@ -10,12 +10,12 @@ namespace swatch {
 namespace apolloherd {
 
 ApolloCMFPGA::ApolloCMFPGA(const swatch::core::AbstractStub& aStub) : EMPDevice(aStub) {
-  if (aStub.id == "kintex")
+  if (aStub.id == "kintex") 
     mFPGA = FPGA::KINTEX;
   else if (aStub.id == "virtex")
     mFPGA = FPGA::VIRTEX;
   else 
-    throw std::runtime_error("Invalid CM FPGA ID '" + aStub.id "' (must be either 'kintex' or 'virtex')");
+    throw std::runtime_error("Invalid CM FPGA ID '" + aStub.id + "' (must be either 'kintex' or 'virtex')");
   
   SMDevice = new BUTool::ApolloSMDevice(arg);
   
