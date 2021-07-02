@@ -1,91 +1,28 @@
-## ApolloSM plugin for HERD library
+# Apollo SWATCH plugin
 
-An ApolloSM-specific plugin using the [HERD Library](https://gitlab.cern.ch/cms-tracker-phase2-onlinesw/herd-library).
+This repository contains a SWATCH plugin library for the Apollo board. Two classes, `ApolloDevice` and `ApolloCMFPGA`, utilize [BUTool](https://github.com/BU-Tools/BUTool) and its Apollo Service Module control plugin [ApolloSM_plugin](https://github.com/apollo-lhc/ApolloSM_plugin) to interact with the Service Module and Command Module hardware, respectively. In addition, the `ApolloCMFPGA` class builds on top of the `EMPDevice` class located in the [EMP SWATCH](https://gitlab.cern.ch/p2-xware/software/emp-herd) plugin, which provides the CM control class with functionality for controlling the EMP (Extensible, Modular, data Processor) firmware framework running on the Command Module's two main FPGAs - the Kintex and Virtex. 
 
-Derived from the work of the CMS Phase-2 Tracker Online SW group, whose work can be found [here](https://gitlab.cern.ch/cms-tracker-phase2-onlinesw).
+This plugin is derived from the work of the CMS Phase-2 Tracker Online SW group, whose repositories can be found [here](https://gitlab.cern.ch/cms-tracker-phase2-onlinesw).
 
-## Overview
-
-This repository contains an ApolloSM_device-specific plugin with an `ApolloDevice` class that utilizes the [EvaluateCommand](https://github.com/BU-Tools/BUTool/blob/a1e09e6b002829820006bb8e749ccb9541450c17/include/BUTool/CommandList.hh#L172) functionality from [BUTool](https://github.com/BU-Tools/BUTool) to wrap several ApolloSM_device commands, including:
-
-* `cmpwrdown`, `cmpwrup`, `read`, `svfplayer` and 
-* `dev_cmd`, which allows for the execution of any ApolloSM_device command by passing the command string and the appropriate arguments.
 
 ## Dependencies
 
-The main dependency is `swatch`, which in turn requires:
+This plugin has several main dependencies:
 
-* Build utilities: make, CMake3
-* [boost](https://boost.org/)
-* [log4cplus](https://github.com/log4cplus/log4cplus)
+* [EMP software](https://serenity.web.cern.ch/serenity/emp-fwk/software/)
+* [EMP SWATCH plugin](https://gitlab.cern.ch/p2-xware/software/emp-herd/)
+* [ApolloTool](https://github.com/apollo-lhc/ApolloTool)
+* [SWATCH software](https://gitlab.cern.ch/cms-cactus/core/swatch)
 
-And, in the switch from ZMQ & msgpack to HTTP & JSON, the HERD control app now requires
-* [jsoncpp-devel](https://github.com/open-source-parsers/jsoncpp)
-for communication.
-
-## Building on an Apollo
-
-1. ssh into the SoC
-
-2. Install the HERD control app and library, along with their dependencies, following the instructions in the [README](https://gitlab.cern.ch/cms-tracker-phase2-onlinesw/herd-control-app):
-
-    * Install the dependencies: `yum install gcc-c++ make cmake3 boost-devel log4cplus-devel yaml-cpp-devel jsoncpp-devel gtest-devel`
-    * Ensure `swatch` checked out, or run `git submodule update --init`
-    * **NOTE:** due to the old compiler on the Apollo failing with certain aspects of the build (namely the test suite, which is not necessary for this), certain aspects of the build process for `swatch` and the control app must be changed:
-        * Comment out [Line 92](https://gitlab.cern.ch/cms-tracker-phase2-onlinesw/herd-control-app/-/blob/master/CMakeLists.txt#L92) of the control app CMakeLists.txt file
-        * Comment out [Line 44](https://gitlab.cern.ch/cms-cactus/core/swatch/-/blob/master/swatch/CMakeLists.txt#L44), [Line 53](https://gitlab.cern.ch/cms-cactus/core/swatch/-/blob/master/swatch/CMakeLists.txt#L53), and [Line 63](https://gitlab.cern.ch/cms-cactus/core/swatch/-/blob/master/swatch/CMakeLists.txt#L53) of the `swatch` CMakeLists.txt file
-    * Build HERD library and control application with
-        ```
-        mkdir build && cd build
-        cmake3 ..
-        make
-        ```
-    * Finally, if you want to install the HERD library and control application, run 
-    ```
-    sudo make install
-    ```
-
-
-
-3. Checkout the ApolloHerd plugin and build by running:
-
-```
-mkdir build && cd build
-cmake3 ..
-make
-```
+Additional subdependencies may arise from these. Due to compatibility issues with the compiler on the rev.1 Apollo blades, this plugin is no longer meant to be built from source. Instead, the plugin is run in a docker container using the instructions below. 
 
 ## Using this plugin with the control application
-**If built directly on SoC:**
-After installing the HERD control app and `swatch` (see above) and building ApolloHerd, run:
 
-```
-source env.sh
-herd-control-app Apollo.yml
-```
+The HERD control application (implemented in the herd-control-app repository) is an executable that loads SWATCH/HERD plugins, and provides a network interface that allows remote applications to run the commands and FSM transitions procedures declared in those plugins. If run with `Apollo.yml` as the configuration file, the control application will load the SWATCH plugin and create three devices:
 
-NOTE: if `ERROR: locale::facet::_S_create_c_locale name not valid` error, then prepend command with `LC_ALL=C` (until workaround found)
+* one for the Service Module (named `ApolloSM_device`), and 
+* two for the Command Module FPGAs (named `kintex` and `virtex`).
 
-```
-source env.sh
-LC_ALL=C herd-control-app Apollo.yml
-```
+At the moment, the control application can be run with the Apollo plugin only in a docker container:
 
-## WIP - Running in a container
-
-Eventually, the goal is to run this software in a container on the Apollo. In the `Docker/` directory there are several scripts designed to be run inside of a container. The main script (almost working) is `build.sh` and installs all of the software necessary to run the HERD control app and the Apollo plugin for HERD. The code is all compiled inside of the container:
-
-```
-gitlab-registry.cern.ch/cms-tracker-phase2-onlinesw/herd-docker/herd-base-dev:master-8cd483a1
-```
-
-**If building in a container: (WIP)**
-To build the image targeting armv7 on x86 architecture:
-1. Navigate to directory containing Dockerfile
-2. Run `docker buildx build --platform linux/arm -t ammitra/apolloherd . --push`
-	* login to the docker hub and substitute your own username as necessary
-This should build and push the armv7 image to the desired registry. 
-
-Useful links regarding `buildx`:
-* https://frightanic.com/computers/docker-buildx-the-best-thing-since-sliced-bread/
-* https://medium.com/@artur.klauser/building-multi-architecture-docker-images-with-buildx-27d80f7e2408
+* **Docker information will be added once a tag is created**
