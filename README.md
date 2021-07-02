@@ -1,3 +1,8 @@
+# THIS BRANCH IS DEPRECATED
+
+This version of `apollo-herd` relies on the `herd-library`, which is no longer used with the Shep-HERD framework. I've kept it for posterity, in case it's useful. This is the last version which is able to be built on the Apollo blade and run natively, without the need for docker. 
+
+
 # Derived from the work of the CMS Phase-2 Tracker Online SW group:
 Their work can be found [here](https://gitlab.cern.ch/cms-tracker-phase2-onlinesw)
 
