@@ -1,10 +1,10 @@
 variables:
   BUILD_PLATFORMS: linux/arm/v7,linux/arm64
   COPY_INSTALL_PATHS: "/opt/BUTool /opt/cactus /opt/UIOuHAL /$LIBRARY_DIR"
-  HERD_IMAGE_TAG: 8806d25f
+  HERD_IMAGE_TAG: 8806d25f1d82bbc6a4c8c52f8a3bc1ba3de1a796
   HERD_DEFAULT_CONFIG: Apollo.yml
 
 include:
   - project: cms-tracker-phase2-onlinesw/herd-control-app
-    ref: 8806d25f
+    ref: 8806d25f1d82bbc6a4c8c52f8a3bc1ba3de1a796
     file: /ci/plugin-template/gitlab-ci.yml
