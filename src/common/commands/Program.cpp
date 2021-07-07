@@ -49,7 +49,7 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
   }
   setProgress(0.1, "Powering up CM_" + CMID);
   // cmpwrup command will return success regardless of whether CM powered up -> need to add BUTextIO to ApolloSMDevice::CMPowerUp
-  ApolloCM.ApolloAccess("cmpwrup" + " " + CMID); // use default wait time (1s)
+  ApolloCM.ApolloAccess("cmpwrup " + CMID); // use default wait time (1s)
 
   // 3) Program the FPGA (using svfplayer from ApolloSMDevice -> ApolloSM)
   setProgress(0.3, "Programming CM" + CMID + " via svfplayer");
