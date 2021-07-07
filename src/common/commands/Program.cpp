@@ -47,11 +47,8 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
       CMID = "2";
       break;
   }
-  setProgress(0.1, "Powering up CM_" + CMID);
-  // cmpwrup command will return success regardless of whether CM powered up -> need to add BUTextIO to ApolloSMDevice::CMPowerUp
-  ApolloCM.ApolloAccess("cmpwrup " + CMID); // use default wait time (1s)
 
-  // 3) Program the FPGA (using svfplayer from ApolloSMDevice -> ApolloSM)
+  // 2) Program the FPGA (using svfplayer from ApolloSMDevice -> ApolloSM)
   setProgress(0.3, "Programming CM" + CMID + " via svfplayer");
   std::string svfplayer("svfplayer");
   // add svfile and xvclabel strings to command and argument string 
@@ -61,17 +58,17 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
   // pass svfplayer command and args to EvaluateCommand via ApolloAccess
   int result = ApolloCM.ApolloAccess(command_and_args);
 
-  // 4) compare command result
+  // 3) compare command result
   // probably need to add a few more here - will do after i understand how svfplayer works and what it returns
   if (result == CommandReturn::status::BAD_ARGS)
     throw core::RuntimeError("bad arguments");
 
-  // 5) Update address table used by EMP commands
+  // 4) Update address table used by EMP commands
   setProgress(0.6, "Updating address table");
   ApolloCM.replaceController("file://" + lBuildProducts.addressTable);
 
 
-  // 6) Read build metadata and run simple checks
+  // 5) Read build metadata and run simple checks
   setProgress(0.9, "Reading build metadata");
   ApolloCM.checkFirmware([&] (const std::string& x) { return this->setStatusMsg(x); });
 
