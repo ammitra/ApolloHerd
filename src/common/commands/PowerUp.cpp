@@ -44,7 +44,7 @@ action::Command::State PowerUp::code(const core::ParameterSet& aParams)
   // power up CM
   setProgress(0.5, "Powering up CM_" + CMID);
   std::string wait = aParams.get<std::string>("wait (s)");
-  std::string command_and_args = "cmpwrup" + " " + CMID + " " + wait;
+  std::string command_and_args = std::string("cmpwrup") + " " + CMID + " " + wait;
   int result = ApolloCM.ApolloAccess(command_and_args);
   if (result == CommandReturn::status::BAD_ARGS)
     throw core::RuntimeError("bad arguments");
