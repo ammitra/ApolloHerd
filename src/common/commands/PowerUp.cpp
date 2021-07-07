@@ -34,17 +34,17 @@ action::Command::State PowerUp::code(const core::ParameterSet& aParams)
   std::string CMID;
   switch (ApolloCM.getFPGA()) {
     case FPGA::KINTEX:
-      CMID = "0";
+      CMID = "1";
       break;
     case FPGA::VIRTEX:
-      CMID = "1";
+      CMID = "2";
       break;
   }
 
   // power up CM
-  setProgress(0.5, "Powering up CM" + CMID);
+  setProgress(0.5, "Powering up CM_" + CMID);
   std::string wait = aParams.get<std::string>("wait (s)");
-  int result = ApolloCM.ApolloAccess("cmpwrup " + CMID + wait);
+  int result = ApolloCM.ApolloAccess("cmpwrup" + " " + CMID + " " + wait);
 
   // currently there is no way to determine if the CM powered up
   // need to get BUTextIO access in ApolloSMDevice (see above)

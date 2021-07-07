@@ -25,16 +25,16 @@ action::Command::State PowerDown::code(const core::ParameterSet& aParams)
   std::string CMID;
   switch (ApolloCM.getFPGA()) {
     case FPGA::KINTEX:
-      CMID = "0";
+      CMID = "1";
       break;
     case FPGA::VIRTEX:
-      CMID = "1";
+      CMID = "2";
       break;
   }
 
-  setProgress(0.5, "Powering down CM" + CMID);
+  setProgress(0.5, "Powering down CM_" + CMID);
   std::string wait = aParams.get<std::string>("wait (s)");
-  int result = ApolloCM.ApolloAccess("cmpwrdown " + CMID + wait);
+  int result = ApolloCM.ApolloAccess("cmpwrdown" + " " + CMID + " " + wait);
   if (result == CommandReturn::status::BAD_ARGS)
     throw core::RuntimeError("bad arguments");
 

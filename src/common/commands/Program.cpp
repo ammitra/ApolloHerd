@@ -41,15 +41,15 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
   switch (ApolloCM.getFPGA()) {
     //  NOTE : might need to change this statement depending on which FPGA has which CMID
     case FPGA::KINTEX:
-      CMID = "0";
-      break;
-    case FPGA::VIRTEX:
       CMID = "1";
       break;
+    case FPGA::VIRTEX:
+      CMID = "2";
+      break;
   }
-  setProgress(0.1, "Powering up CM" + CMID);
+  setProgress(0.1, "Powering up CM_" + CMID);
   // cmpwrup command will return success regardless of whether CM powered up -> need to add BUTextIO to ApolloSMDevice::CMPowerUp
-  ApolloCM.ApolloAccess("cmpwrup "+CMID); // use default wait time (1s)
+  ApolloCM.ApolloAccess("cmpwrup" + " " + CMID); // use default wait time (1s)
 
   // 3) Program the FPGA (using svfplayer from ApolloSMDevice -> ApolloSM)
   setProgress(0.3, "Programming CM" + CMID + " via svfplayer");
