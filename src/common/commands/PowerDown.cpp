@@ -34,9 +34,13 @@ action::Command::State PowerDown::code(const core::ParameterSet& aParams)
 
   setProgress(0.5, "Powering down CM_" + CMID);
   std::string wait = aParams.get<std::string>("wait (s)");
-  int result = ApolloCM.ApolloAccess("cmpwrdown" + " " + CMID + " " + wait);
+  std::string command_and_args = "cmpwrdown" + " " + CMID + " " + wait;
+  int result = ApolloCM.ApolloAccess(command_and_args);
   if (result == CommandReturn::status::BAD_ARGS)
     throw core::RuntimeError("bad arguments");
+
+  // return cmpwrdown result to Shep
+  setResult(oss.str());
 
   return State::kDone;
 }

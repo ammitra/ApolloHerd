@@ -44,12 +44,13 @@ action::Command::State PowerUp::code(const core::ParameterSet& aParams)
   // power up CM
   setProgress(0.5, "Powering up CM_" + CMID);
   std::string wait = aParams.get<std::string>("wait (s)");
-  int result = ApolloCM.ApolloAccess("cmpwrup" + " " + CMID + " " + wait);
-
-  // currently there is no way to determine if the CM powered up
-  // need to get BUTextIO access in ApolloSMDevice (see above)
+  std::string command_and_args = "cmpwrup" + " " + CMID + " " + wait;
+  int result = ApolloCM.ApolloAccess(command_and_args);
   if (result == CommandReturn::status::BAD_ARGS)
     throw core::RuntimeError("bad arguments");
+
+  // return cmpwrup result to Shep
+  setResult(oss.str());
 
   return State::kDone;
 }
