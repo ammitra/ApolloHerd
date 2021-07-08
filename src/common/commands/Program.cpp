@@ -106,7 +106,7 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
   ApolloCM.ApolloAccess(initialize.str());
   setStatusMsg(statusMsg.str());
   statusMsg.str("");
-  ApolloCM.RemoveStream(&statusMsg);  // no longer needed.
+  ApolloCM.RemoveStream(Level::INFO, &statusMsg);  // no longer needed.
 
   // unblock AXI
   setStatusMsg("Unblocking AXI");
