@@ -20,6 +20,10 @@ void ApolloDeviceController::AddStream(Level::level level, std::ostream* os) {
   ptrSMDevice->AddOutputStream(level, os);
 }
 
+void ApolloDeviceController::RemoveStream(Level::level level, std::ostream* os) {
+  ptrSMDevice->RemoveOutputStream(level, os);
+}
+
 int ApolloDeviceController::ApolloAccess(std::string command_args)
 {
   // split command_args into constituent parts
