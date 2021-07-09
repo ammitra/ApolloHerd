@@ -54,3 +54,10 @@ The above command
 3. mounts the directory `/path/to/apollo-config` on the host to `/config` in the container. In this example, and in practice, the directory should contain one config file, named `Apollo.yml`
 4. specifies the appropriate apollo-herd image to run, and, 
 5. starts the HERD control app with the appropriate Apollo-specific config file, `Apollo.yml`
+
+For debugging the image, you should run `start_apolloherd.sh` with the flag combination `-it --entrypoint bin/bash` in order to run the container interactively without the HERD control application starting up. Once inside the container, you can begin the plugin by running:
+
+```
+source entrypoint_env.sh
+herd-control-app herd-config.yml
+```
