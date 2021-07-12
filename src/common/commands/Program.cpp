@@ -35,7 +35,7 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
   // 1) Extract the tarball (using refactored EMP utilities code)
   setProgress(0., "Extracting FW package");
   using emp::swatch::utilities::extractFirmwarePackage;
-  const auto lBuildProducts = extractFirmwarePackage(aParams.get<action::File>("package").getPath(),
+  const auto lBuildProducts = extractFirmwarePackage(aParams.get<action::File>("packagePath").getPath(),
                                                       ".svf",
                                                       aParams.get<std::string>("addressTable"));
   
