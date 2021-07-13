@@ -109,17 +109,23 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
   ApolloCM.RemoveStream(Level::INFO, &statusMsg);  // no longer needed.
 
   // unblock AXI
+  printf("Unblocking AXI\n"); // DEBUG
   setStatusMsg("Unblocking AXI");
   ApolloCM.ApolloAccess("unblockAXI");  // no output from this function
+  printf("AXI Unblocked\n");  // DEBUG
 
 
   // 6) Update address table used by EMP commands
+  printf("Updating the address table\n"); // DEBUG
   setProgress(0.6, "Updating address table");
   ApolloCM.replaceController("file://" + lBuildProducts.addressTable);
+  printf("Address table updated\n");      // DEBUG
 
   // 7) Read build metadata and run simple checks
+  printf("Reading build metadata\n");     // DEBUG
   setProgress(0.8, "Reading build metadata");
   ApolloCM.checkFirmware([&] (const std::string& x) { return this->setStatusMsg(x); });
+  printf("Read build metadata\n");        // DEBUG
 
   return State::kDone;
 }
