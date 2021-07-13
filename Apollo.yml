@@ -10,9 +10,9 @@ devices:
     addressTable: /path/to/addressTableA.xml
   - id: kintex
     class: swatch::apolloherd::ApolloCMFPGA
-    uri: ipbusmmap-2.0:///dev/uioKINTEX_IPBUS?offset=0x0
+    uri: ipbusmmap-2.0:///dev/uio22?offset=0x0
     addressTable: file:///home/cms/EMP/addrtab/top_emp_slim.xml
   - id: virtex
     class: swatch::apolloherd::ApolloCMFPGA
-    uri: ipbusmmap-2.0:///dev/uioVIRTEX_IPBUS?offset=0x0
+    uri: ipbusmmap-2.0:///dev/uio28?offset=0x0
     addressTable: file:///home/cms/EMP/addrtab/top_emp_slim.xml
