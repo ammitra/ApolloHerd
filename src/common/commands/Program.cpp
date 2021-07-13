@@ -11,7 +11,7 @@ Program::Program(const std::string& aId, action::ActionableObject& aActionable) 
 {
   registerParameter<action::File>("packagePath", { "/path/to/package.tgz", "package.tgz"});
 
-  registerParameter<std::string>("XVCLabel","");  // might just be able to hard-code
+  registerParameter<std::string>("XVCLabel","PLXVC.XVC_1");  // hard-code for now
   
   registerParameter<std::string>("addressTable", "top.xml");
 }
