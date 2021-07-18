@@ -122,7 +122,7 @@ action::Command::State Program::code(const core::ParameterSet& aParams)
   fprintf(stderr, "Address table updated\n");      // DEBUG
 
   // 7) Read build metadata and run simple checks
-  frintf(stderr, "Reading build metadata\n");     // DEBUG
+  fprintf(stderr, "Reading build metadata\n");     // DEBUG
   setProgress(0.8, "Reading build metadata");
   ApolloCM.checkFirmware([&] (const std::string& x) { return this->setStatusMsg(x); });
   fprintf(stderr, "Read build metadata\n");        // DEBUG
