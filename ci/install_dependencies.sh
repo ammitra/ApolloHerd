@@ -4,7 +4,7 @@ set -e
 set -x 
 
 UHAL_VERSION=2.8.1
-UIOUHAL_VERSION="develop"
+UIOUHAL_VERSION="feature/extra-protection"
 APOLLOTOOL_VERSION="master"
 
 if [ "$1" != "app" ]; then
