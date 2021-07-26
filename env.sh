@@ -36,3 +36,6 @@ export LD_LIBRARY_PATH
 
 #export SWATCH_LOG4CPLUS_CONFIG=${BASE_DIR}/herd-library/log4cplus.properties
 export SWATCH_LOG4CPLUS_CONFIG=/usr/local/etc/herd/log4cplus.properties
+
+# setting env variable to allow direct access to hardware via memmap using IPBus 2.0
+export UHAL_ENABLE_IPBUS_MMAP=1

@@ -24,6 +24,8 @@ public:
   // access ApolloSMDevice's AddOutputStream() method, inherited from BUTextIO via CommandListBase
   void AddStream(Level::level level, std::ostream* os);
 
+  void RemoveStream(Level::level level, std::ostream* os);
+
 private:
   BUTool::ApolloSMDevice *ptrSMDevice;
   std::vector<std::string> arg {"/opt/address_tables/connections.xml"};

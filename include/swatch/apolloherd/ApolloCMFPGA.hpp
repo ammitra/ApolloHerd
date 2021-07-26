@@ -21,6 +21,7 @@ public:
   // use to call any relevant CM commands
   int ApolloAccess(std::string command_args);
   void AddStream(Level::level level, std::ostream* os);
+  void RemoveStream(Level::level level, std::ostream* os);
   FPGA getFPGA();
 private:
   void retrieveMetricValues() override; // implement but don't define

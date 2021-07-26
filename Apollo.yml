@@ -6,13 +6,13 @@ libraries:
 devices:
   - id: ApolloSM_device
     class: swatch::apolloherd::ApolloDevice
-    uri: blah:///dev/fileA
+    uri: uioaxi-1.0:///opt/address_table/address_apollo.xml
     addressTable: /path/to/addressTableA.xml
   - id: kintex
     class: swatch::apolloherd::ApolloCMFPGA
-    uri: blah:///dev/fileB
-    addressTable: /path/to/addressTableB.xml
+    uri: ipbusmmap-2.0:///dev/uio22?offset=0x0
+    addressTable: file:///home/cms/EMP/addrtab/top_emp_slim.xml
   - id: virtex
     class: swatch::apolloherd::ApolloCMFPGA
-    uri: blah:///dev/fileC
-    addressTable: /path/to/addressTableC.xml
+    uri: ipbusmmap-2.0:///dev/uio28?offset=0x0
+    addressTable: file:///home/cms/EMP/addrtab/top_emp_slim.xml
